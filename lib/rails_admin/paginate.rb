@@ -7,7 +7,7 @@ module RailsAdmin
 
     def to_s
       return "" unless @scope
-      current_page, total_pages = @options[:spage].to_i, @scope.total_nums / @options[:stint]
+      current_page, total_pages = @options[:spage].to_i, RailsAdmin::Client.total_nums / @options[:stint]
       return "" if total_pages <= 1
       #always show paginate
 
@@ -39,7 +39,7 @@ module RailsAdmin
                       helpers.link_to("下一页 ›", "#{url}?#{param_name}=#{current_page+1}")
                     end if current_page < total_pages
           result += helpers.content_tag :li, class: 'disabled total_pages' do
-              helpers.link_to "共#{@scope.total_nums}条数据", "#"
+              helpers.link_to "共#{RailsAdmin::Client.total_nums}条数据", "#"
           end
           result.html_safe
         end

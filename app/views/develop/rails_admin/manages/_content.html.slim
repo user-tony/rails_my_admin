@@ -13,5 +13,5 @@
 						tr
 							- content.each do |key,value|
 								td
-									span class="editable#{' edit_datepicker' if value.is_a?(Time)}" data-field="#{key}" data-table="#{@entries.table_name}" data-title="#{value}" data-url="/develop/rails_admin/manages/#{content.values.first}"
+									span class="editable#{' edit_datepicker' if value.is_a?(Time)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="/develop/rails_admin/manages/#{content.values.first}"
 										= format(value)
