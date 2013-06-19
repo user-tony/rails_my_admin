@@ -1,0 +1,41 @@
+#search_area
+	.CodeMirror{
+		height: 130px;
+	}
+
+#content
+	.details{
+		overflow: scroll;
+		max-height:1000px;
+		height: 800px;
+	}
+
+#main{
+	display: block;
+}
+
+#main .pagination{
+	text-align: center;
+}
+
+.pagination span.current{
+	
+}
+.pagination span a{
+	padding: 4px;
+}
+
+
+#grid_search
+	table{
+		width: 100%;
+	}
+
+.editable { border-bottom:1px dotted #333; }
+.editable input, .editable textarea { font-size:11px; border:1px solid #C6D9E9; }
+.editable button { border:0; border-radius:99px; cursor:pointer; padding:0; margin:1px; width:22px; height:22px; display:inline-block; color:white; font-size:12px; -moz-transition-duration: 1s; -webkit-transition-duration: 1s; -ms-transition-duration: 1s; }
+.editable button[type=submit] { background-color:lightgreen; }
+.editable button[type=submit]:hover { background-color:darkgreen; }
+.editable button[type=cancel] { background-color:silver; }
+.editable button[type=cancel]:hover { background-color:#333; }
+

@@ -1,0 +1,7 @@
+#main
+	#sidebar
+		= render 'menv'
+	#content
+		= render 'form'
+		= render 'content'
+		= paginate @entries, spage: @page, total_nums: @total_nums,stint: @per
