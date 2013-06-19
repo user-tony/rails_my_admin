@@ -12,17 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require underscore
-//= require backbone
-//= require backbone_rails_sync
-//= require backbone_datalink
-//= require backbone/rails_admin
 //= require codemirror
 //= require sql
 //= require develop/rails_admin/manages
-//= require twitter/bootstrap
-//= require jquery.1.9.1-ui.min
-//= require pqgrid.min
 //= require jquery.jeditable
 //= require editable
 //= require dyndatetime/dynDateTime

@@ -8,8 +8,8 @@ module RailsAdmin
     def to_s
       return "" unless @scope
       current_page, total_pages = @options[:spage].to_i, @scope.total_nums / @options[:stint]
-      #always show paginate
       return "" if total_pages <= 1
+      #always show paginate
 
       param_name = @options["param_name"] || "page"
 

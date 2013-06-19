@@ -11,10 +11,8 @@ html
       #wrapper2
         #wrapper3
           #header
-            h1 北京优众网
+            h1
             #main-menu
-              ul
-                li = link_to '数据库管理', develop_rails_admin_manages_path, class: "overview #{controller_name.match(/views/) ? "selected" : ''}"
           - if flash[:success]
             .alert.alert-success
               button data-dismiss="alert" class="close" type="button" x
@@ -36,4 +34,4 @@ html
   #footer
     #bgl
       .bgr
-      Powered by <a href="http://www.ihaveu.com/" target="_blank"> www.ihaveu.com &copy; 2013-2026
+      Powered by <a href="#" target="_blank"> RailsAdmin &copy; 2013-2026

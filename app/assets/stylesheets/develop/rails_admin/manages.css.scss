@@ -6,8 +6,6 @@
 #content
 	.details{
 		overflow: scroll;
-		max-height:1000px;
-		height: 800px;
 	}
 
 #main{
@@ -38,4 +36,3 @@
 .editable button[type=submit]:hover { background-color:darkgreen; }
 .editable button[type=cancel] { background-color:silver; }
 .editable button[type=cancel]:hover { background-color:#333; }
-
