@@ -17,19 +17,22 @@ html
             .alert.alert-success
               button data-dismiss="alert" class="close" type="button" x
               strong
-                成功：#{flash[:success]}
+                | 成功:
+                = flash[:success]
 
           - if flash[:errors]
             .alert.alert-error
               button data-dismiss="alert" class="close" type="button" x
               strong
-                错误: #{flash[:errors]}
+                | 错误:
+                = flash[:errors]
 
           - if flash[:notice]
             .alert.alert-info
               button data-dismiss="alert" class="close" type="button" x
               strong
-                成功：= flash[:notice]
+                | 成功:
+                = flash[:notice]
           = yield
   #footer
     #bgl
