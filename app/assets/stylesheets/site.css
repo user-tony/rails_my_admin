@@ -23,7 +23,7 @@ h4 {border-bottom: 1px dotted #bbb;}
 #main{display: block; position: relative; }
 #wrapper3 #main #content{
 	float: right;
-	width: 78%;
+	width: 80%;
 	padding: 0px;
 	margin: 10px 0;
 }
@@ -521,6 +521,89 @@ span.cm-separator {
 }
 span.cm-number {
     color: teal;
+}
+
+/* nav  */
+div.nav{
+  background-image: linear-gradient(to bottom, #ffffff, #f2f2f2) ;
+  padding: 5px;
+  margin: 10px 0px 10px 0px;
+  font-size: 18px;
+}
+div.nav a{
+  margin-left: 3px;
+}
+
+#content h5{
+  padding: 3px;
+  width: 160px;
+  text-align: center;
+  background-color: #D2E9FF;
+}
+span.author-name{
+  padding: 2px 4px 2px 4px;
+  margin: 3px;
+  background-color: #d0d0d0;
+}
+
+#main-menu li a.selected {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #555555;
+}
+
+#header {
+    background-color: #507AAA;
+    color: #F8F8F8;
+    height: 6.2em;
+    margin: 0;
+    padding: 4px 8px 0 6px;
+    position: relative;
+}
+#header h1 {
+    margin-left: 0;
+    margin-top: 0.3em;
+}
+
+#main-menu {
+    bottom: 3px;
+    left: 26px;
+    margin-right: -500px;
+    position: absolute;
+}
+
+#wrapper {
+    background: none repeat scroll 0 0 #F1EFE2;
+}
+#wrapper3 {
+    background: none repeat scroll 0 0 #FFFFFF;
+    box-shadow: 1px 1px 5px #999999;
+    margin: 0 10px;
+}
+
+#main-menu ul {
+    margin: 0;
+    padding: 0;
+}
+
+
+#main-menu li {
+    float: left;
+    list-style-type: none;
+    margin: 0 2px 0 0;
+    padding: 0;
+    white-space: nowrap;
+}
+#main-menu li a {
+    background: none repeat scroll 0 0 #507AAA;
+    font-weight: bold;
+    padding: 4px 10px;
+}
+#main-menu li a:hover {
+    background: none repeat scroll 0 0 #759FCF;
+}
+#main-menu li a.selected {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #555555;
 }
 
 
