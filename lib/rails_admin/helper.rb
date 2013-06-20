@@ -1,7 +1,7 @@
 module ActionView
 	module Helpers
 		module DateHelper
-			def paginate(scope, options = {})
+			def custom_paginate(scope, options = {})
 				paginate = RailsAdmin::Paginate.new(scope, options.update(per_page: options[:stint]))
 				paginate.to_s
 			end

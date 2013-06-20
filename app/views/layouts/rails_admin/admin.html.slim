@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    title RailsAdmin
+    meta name="key_words" content="template languagea"
+    = stylesheet_link_tag "rails_admin", media: "all"
+    = javascript_include_tag 'rails_admin'
+    = csrf_meta_tag
+  body.controller-projects.action-show
+    #wrapper
+      #wrapper2
+        #wrapper3
+          #header
+            h1
+            #main-menu
+          - if flash[:success]
+            .alert.alert-success
+              button data-dismiss="alert" class="close" type="button" x
+              strong
+                成功：#{flash[:success]}
+
+          - if flash[:errors]
+            .alert.alert-error
+              button data-dismiss="alert" class="close" type="button" x
+              strong
+                错误: #{flash[:errors]}
+
+          - if flash[:notice]
+            .alert.alert-info
+              button data-dismiss="alert" class="close" type="button" x
+              strong
+                成功：= flash[:notice]
+          = yield
+  #footer
+    #bgl
+      .bgr
+      Powered by <a href="#" target="_blank"> RailsAdmin &copy; 2013-2026

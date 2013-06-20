@@ -1,8 +1,0 @@
-.main-menu-span style="padding:8px;margin-left:0px"
-	.well.nav-collapse.sidebar-nav
-		ul.nav.nav-tabs.nav-stacked.main-menu
-			li.nav-header.hidden-tablet style="font-size:12px"
-				| 数据库  #{RailsAdmin::Client.conn.query_options[:database]}
-				- RailsAdmin::Client.get_tables.each do |table|
-					= menu_li_link_to(params[:id] == table.values.first) do
-						= link_to table.values.first, develop_rails_admin_manage_path(table.values.first), title: "[#{table.keys.first}] #{table.values.first}"

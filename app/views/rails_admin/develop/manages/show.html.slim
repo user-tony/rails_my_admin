@@ -1,0 +1,7 @@
+#main
+	#sidebar
+		= render 'menv'
+	#content
+		= render 'form'
+		= render 'content'
+		= custom_paginate @entries, spage: @page, stint: @per
