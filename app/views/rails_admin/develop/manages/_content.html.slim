@@ -1,0 +1,17 @@
+.nav#nav
+	| #{@content}
+	.details#grid_search
+		- if @entries.present? && @entries.first
+			table#edit_tables.table-bordered.table.table-hover
+				thead
+					tr#th-title
+						- @entries.first.keys.each do |entry|
+							th
+								= entry
+				tbody
+					- @entries.each do |content|
+						tr
+							- content.each do |key,value|
+								td
+									span class="#{'editable' unless key == 'id'} #{' edit_datepicker' if value.is_a?(Time)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="#{develop_manage_path(content.values.first)}"
+										= format(value)
