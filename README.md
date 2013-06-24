@@ -1,4 +1,4 @@
-## Translation Rails
+## Rails Admin
 
 ## Getting started   
 
