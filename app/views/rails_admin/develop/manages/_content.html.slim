@@ -1,4 +1,4 @@
-.nav
+.nav#nav
 	| #{@content}
 	.details#grid_search
 		- if @entries.present? && @entries.first
@@ -13,5 +13,5 @@
 						tr
 							- content.each do |key,value|
 								td
-									span class="editable#{' edit_datepicker' if value.is_a?(Time)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="#{develop_manage_path(content.values.first)}"
+									span class="#{'editable' unless key == 'id'} #{' edit_datepicker' if value.is_a?(Time)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="#{develop_manage_path(content.values.first)}"
 										= format(value)

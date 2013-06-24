@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version = RailsAdmin::VERSION
   s.authors = ["Lijia Tong"]
   s.email = ["wtuyuupe@163.com"]
-  s.homepage = "http://github.com/tonglijia/svn_record"
-  s.summary = "..."
-  s.description = "Used to manage them in the svn project"
+  s.homepage = "http://github.com/tonglijia/rails_admin"
+  s.summary = "Can be used in the development process, often a tool to modify the database contents"
+  s.description = "Content Management Database Development Environment"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]

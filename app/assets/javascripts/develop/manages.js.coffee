@@ -10,9 +10,11 @@ $(document).ready ->
 		editor.setOption("theme", 'twillght');
 
 	$('span.edit_datepicker').on 'click', 'textarea', -> $(this).dynDateTime()
-	# if ($('.main-menu-span .well ul li').size() > 50)
-	# 	$('.main-menu-span .well ul li:gt(25)').slideToggle();
-	# 	$('.main-menu-span .well ul li:eq(25)').after('<li> <a href="#" id="more">查看更多....</a></li>');
-	# 	$('.main-menu-span .well ul li a#more').on 'click', ->
-	# 		$('.main-menu-span .well ul li:gt(25)').slideToggle()
-	# 	false
+	height = Math.floor($('#content #nav').height()/40)+18
+	if ($('.main-menu-span .well ul li').size() > height)
+		$('.main-menu-span .well ul li:gt('+height+')').slideToggle();
+		$('.main-menu-span .well ul li:eq('+height+')').after('<li> <a href="#" id="more">查看更多....</a></li>');
+		$('.main-menu-span .well ul li a#more').on 'click', ->
+			$('.main-menu-span .well ul li:gt('+height+')').slideToggle()
+			false
+		false
