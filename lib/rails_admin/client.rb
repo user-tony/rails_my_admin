@@ -20,12 +20,40 @@ class RailsAdmin::Client < Mysql2::Client
 	end
 
 	def self.limit(query_sql, page=1, stint)
-		page = page == 1 ? page = 0 : page.to_i*stint.to_i
+		page = page == 1 ? page = 0 : page.to_i*stint.to_i-stint.to_i
 		query_sql.downcase.match(Syntax).present? ? query_sql.downcase.gsub(Syntax, "limit #{page},#{stint}") : "#{query_sql} LIMIT #{page},#{stint}"
 	end
 
 	def self.get_tables
 		@tables ? @tables : @tables = conn.origin_query('SHOW TABLES')
+	end
+
+	def self.compose(params)
+		"SELECT * FROM #{params[:id]} #{compose_key(params)}"
+	end
+
+	def self.compose_key(params)
+		case params[:calc]
+		when '=', '>', '<'
+			"WHERE #{params[:field]} #{params[:calc]} '#{params[:q]}' "
+		when 'IN'
+			"WHERE #{params[:field]} #{params[:calc]} (#{params[:q]}) "
+		when '≠'
+			"WHERE #{params[:field]} != '#{params[:q]}'"
+		when 'LIKE'
+			"WHERE #{params[:field]} LIKE '%#{params[:q]}%'"
+		when 'IS NULL'
+			"WHERE #{params[:field]} IS NULL"
+		when '≥'
+			"WHERE #{params[:field]} >= '#{params[:q]}'"
+		when '≤'
+			"WHERE #{params[:field]} <= '#{params[:q]}'"
+		end
+	end
+
+
+	def self.delete(table_name, ids)
+		conn.origin_query("DELETE FROM #{table_name} WHERE id IN (#{ids.join(',')})") if ids.is_a?(Array)
 	end
 
 

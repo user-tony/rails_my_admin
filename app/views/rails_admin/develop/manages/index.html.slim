@@ -4,4 +4,5 @@
 	#content
 		= render 'form'
 		= render 'content'
-		= custom_paginate @entries, spage: @page, total_nums: @total_nums,stint: @per
+		/ = custom_paginate @entries, spage: @page, total_nums: @total_nums,stint: @per
+		= custom_paginate @entries, spage: @page,stint: @per

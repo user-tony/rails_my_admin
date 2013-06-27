@@ -2,9 +2,26 @@ class RailsAdmin::Develop::ManagesController < RailsAdmin::Develop::ApplicationC
 
 	before_filter :find_params, except: %w(update)
 
-	def index;end
+	def index
+		@q = params[:q] || RailsAdmin::Client.query_str
+		if @q.present?
+			@entries = RailsAdmin::Client.query(@q,@page, @per) 
+			RailsAdmin::Client.query_str = @q
+			@total_nums =  @entries.size/@per+2
+		end
+	rescue Exception => e
+		RailsAdmin::Client.query_str = @q
+		flash[:errors] = e.message
+	end
 
-	def show;end
+	def show 
+		@query_str = "SELECT * FROM #{params[:id]}"
+		@query_str = RailsAdmin::Client.compose(params) if params[:q].present? && params[:field].present?
+		@fields = RailsAdmin::Client.conn.origin_query("desc #{params[:id]}").each
+		@entries = RailsAdmin::Client.query(@query_str,@page, @per)
+	rescue Exception => e
+		flash[:errors] = e.message
+	end
 
 	def filter
 		redirect_to action: :index
@@ -15,17 +32,15 @@ class RailsAdmin::Develop::ManagesController < RailsAdmin::Develop::ApplicationC
 		render text: 'success'
 	end
 
+	def destroy
+		RailsAdmin::Client.delete(params[:id], params[:edit_id]) if params[:edit_id].present? 
+		# flash[:success] = "删除成功"
+		# redirect_to develop_manage_path(params[:id])
+		render json: params[:edit_id]
+	end
+
 	def find_params
 		@page , @per = (params[:page] || 1).to_i, (params[:per] || 100).to_i
-		@q = params[:id].present? ? "SELECT * FROM #{params[:id]}" : params[:q] || RailsAdmin::Client.query_str
-		if @q.present?
-			@entries = RailsAdmin::Client.query(@q,@page, @per) 
-			RailsAdmin::Client.query_str = @q
-			@total_nums =  @entries.size/@per+2
-		end
-	rescue Exception => e
-		RailsAdmin::Client.query_str = @q
-		flash[:errors] = e.message
 	end
 
 end

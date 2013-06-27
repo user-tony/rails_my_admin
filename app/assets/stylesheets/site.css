@@ -10,6 +10,15 @@ h4 {border-bottom: 1px dotted #bbb;}
 
 /***** Layout *****/
 
+body {
+    background-color: #FFFFFF;
+    color: #555555;
+    font-family: "Ubuntu",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    margin: 0;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2);
+}
  
 #account {float:right;}
 
@@ -606,4 +615,50 @@ span.author-name{
     color: #555555;
 }
 
+
+#edit_tools{
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+  border-spacing: 0;
+  background-color: #DDD;
+  text-align: center;
+}
+
+#edit_tools .span3 a{
+  background-color: lightgreen;
+}
+
+#content ul{
+  margin: 30px 10px;
+}
+
+.navbar { min-height: 40px}
+.navbar ul .content{
+  padding: 26px;
+  height: 37px;
+  width: 79px;
+  background: #DDD url("/assets/content.jpg") no-repeat -199px 0;
+}
+
+.navbar ul .query{
+  padding: 26px;
+  height: 37px;
+  width: 79px;
+  background: #DDD url("/assets/content.jpg") no-repeat -74px -64px;
+}
+
+
+.navbar ul li{
+  list-style-type: none;
+  display: inline;
+  margin: 2px;
+}
+
+.pagination {
+    display: inline;
+    margin: 20px 0;
+    margin-left: 20px;
+    vertical-align: top;
+}
 

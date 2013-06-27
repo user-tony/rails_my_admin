@@ -7,7 +7,7 @@ module RailsAdmin
 
 		def to_s
 			return "" unless @scope
-			current_page, total_pages = @options[:spage].to_i, RailsAdmin::Client.total_nums / @options[:stint]
+			current_page, total_pages = @options[:spage].to_i, RailsAdmin::Client.total_nums / @options[:stint] + 1
 			return "" if total_pages <= 1
 			param_name = @options["param_name"] || "page"
 			url = @options["url"] || ""

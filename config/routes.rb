@@ -5,6 +5,7 @@ RailsAdmin::Engine.routes.draw do
 			post :filter, on: :collection
 			get :show, on: :member
 			put :update, on: :member
+			delete :destroy, on: :member
 		end
 	end
 end

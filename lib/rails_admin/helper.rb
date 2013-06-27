@@ -36,6 +36,18 @@ module ActionView
 			def menu_li_link_to(mark ,&block)
 				"<li class=\"#{'active' if mark }\">#{capture(&block)}</li>".html_safe
 			end
+
+
+			def edited(key, value, str='')
+				str << 'editable' unless key == 'id'
+				str << ' edit_datepicker' if value.is_a?(Time)
+				str
+			end
+
+			def options_for_select_column_data(tabel, selected=nil)
+				options_for_select RailsAdmin::Client.conn.origin_query("desc #{tabel}").each.map{|a| [ a["Field"],a["Field"], column_type: a["Type"].gsub(/\(.*?\)/,'') ]}, selected
+			end
+
 		end
 	end
 end
