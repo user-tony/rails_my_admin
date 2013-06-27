@@ -625,8 +625,10 @@ span.author-name{
   text-align: center;
 }
 
-#edit_tools .span3 a{
-  background-color: lightgreen;
+
+#edit_tools span{
+  width: 300px;
+  margin-left: 100px;
 }
 
 #content ul{

@@ -17,6 +17,8 @@ options_select_data = (x) ->
 remove_tr = (id) ->
 	$('.tr_'+id).fadeToggle("slow", "linear");
 
+checked_status = -> $('#btn_delete').attr('disabled', !$('#edit_tables .edit_checkbox:checked').length > 0)
+
 $(document).ready ->
 	if document.getElementById("search-textarea")
 		editor = CodeMirror.fromTextArea(document.getElementById("search-textarea"), {
@@ -40,19 +42,25 @@ $(document).ready ->
 		false
 
 
-	$('#field').on 'click', 'option',  -> $('#calc').html(options_select_data($(this).attr('column_type')))
 
 	$('#field option:first').click()
+	checked_status()
 
-	$('#edit_tables').on 'click', '.edit_checkbox', -> $('#btn_delete').attr('disabled', !$('#edit_tables .edit_checkbox:checked').length > 0)
+	$('#field').on 'click', 'option',  -> $('#calc').html(options_select_data($(this).attr('column_type')))
+	$('#edit_tables').on 'click', '.edit_checkbox', -> checked_status()
+	$('#edit_tools').on 'click', '.deselect', ->
+		$('#edit_tables .edit_checkbox:checked').attr('checked', false)
+		checked_status()
+		false
 
-	$('#btn_delete').attr('disabled', !$('#edit_tables .edit_checkbox:checked').length > 0)
-
-	$('#btn_delete').on 'click', -> 
+	$('#btn_delete').on 'click', ->
+		return false if $(this).attr('disabled')
 		if(window.confirm("确定要删除么?"))
 			$.ajax
 				url: $('#details_form').attr("action"), data: $('#details_form').serialize(), type: 'delete', dataType: 'json',
 				success: (data) -> remove_tr id for id in data
 		false
+
+
 
 	false

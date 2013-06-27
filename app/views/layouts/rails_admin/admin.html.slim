@@ -36,8 +36,10 @@ html
 					= yield
 	#edit_tools
 		span
+			= link_to '取消选择', "#", class: 'btn deselect', title: '取消选择'
+		span
 			= link_to '✔', "#", class: 'btn', title: '保存', disabled: true
-			= link_to '✘', "#", class: 'btn', title: '删除', disabled: true, id: "btn_delete"
+			= link_to '✘', "", class: 'btn', title: '删除', disabled: true, id: "btn_delete"
 			= link_to '╃', "#", class: 'btn', title: '添加'
 			= @entries.present? ? custom_paginate(@entries, spage: @page, stint: @per) : '0条数据'
 	#footer
