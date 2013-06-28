@@ -34,15 +34,14 @@ html
 								| 成功:
 								= flash[:notice]
 					= yield
-	#edit_tools
-		span
-			= link_to '取消选择', "#", class: 'btn deselect', title: '取消选择'
-		span
-			= link_to '✔', "#", class: 'btn', title: '保存', disabled: true
-			= link_to '✘', "", class: 'btn', title: '删除', disabled: true, id: "btn_delete"
-			= link_to '╃', "#", class: 'btn', title: '添加'
-			= @entries.present? ? custom_paginate(@entries, spage: @page, stint: @per) : '0条数据'
-	#footer
-		#bgl
-			.bgr
-			Powered by <a href="#" target="_blank"> RailsAdmin &copy; 2013-2026
+	- if @entries.present?
+		#edit_tools
+			span
+				label 当前选择<span id="select_num">0</span>条
+			span
+				= link_to 'ⓧ', "#", class: 'btn deselect', title: '取消选择'
+				= link_to '✘', "", class: 'btn', title: '删除', disabled: true, id: "btn_delete"
+			span
+				/ # = link_to '✔', "#", class: 'btn', title: '保存', disabled: true
+				/ # = link_to '✚', new_develop_manage_path(id: RailsAdmin::Client.table_name), class: 'btn', title: '添加'
+				= @entries.present? ? custom_paginate(@entries, spage: @page, stint: @per) : '0条数据'

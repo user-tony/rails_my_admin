@@ -1,0 +1,22 @@
+#main
+	#sidebar
+		= render 'menv'
+	.content
+		.navbar
+			ul
+				li
+					= link_to image_tag("edit.png"), develop_manage_path(params[:id] || RailsAdmin::Client.table_name), class: 'btn_content', title: '内容'
+				li
+					= link_to image_tag("add.png"), new_develop_manage_path(id: params[:id] || RailsAdmin::Client.table_name), class: 'btn_new', title: '添加'
+
+		.row-fluid
+			= form_tag develop_manages_path
+				= field_set_tag "数据表[#{params[:id]}]" do
+					= hidden_field_tag 'table_name', params[:id]
+					- RailsAdmin::Client.conn.origin_query("DESC #{params[:id]}").each.map do |column|
+						- next if column["Field"] == "id"
+						= label_tag column["Field"]
+						- column["Field"] = "field[#{column["Field"]}]"
+						= content_field column
+					.controllers
+						= submit_tag '保存', class: 'btn btn-primary'

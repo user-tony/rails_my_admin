@@ -48,6 +48,23 @@ module ActionView
 				options_for_select RailsAdmin::Client.conn.origin_query("desc #{tabel}").each.map{|a| [ a["Field"],a["Field"], column_type: a["Type"].gsub(/\(.*?\)/,'') ]}, selected
 			end
 
+
+			def content_field(column)
+				type = column["Type"].gsub(/\(.*?\)/,'')
+				case type
+				when 'text'
+					text_area_tag column["Field"], column["Default"],  class: "#{type} span4"
+				when 'varchar'
+					text_field_tag column["Field"], column["Default"], class: "#{type} span4"
+				when 'int'
+					number_field_tag column["Field"], column["Default"], class: "#{type} span4"
+				when 'tinyint'
+					select_tag column["Field"], options_for_select([['是',1],['否',0]]), class: "#{type} span4"
+				else
+					text_field_tag column["Field"], column["Default"], class: "#{type} span4"
+				end
+			end
+
 		end
 	end
 end

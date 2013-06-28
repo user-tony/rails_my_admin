@@ -8,10 +8,14 @@
 						- @entries.first.keys.each do |entry|
 							th
 								= entry
-				tbody
-					- @entries.each do |content|
-						tr
-							- content.each do |key,value|
+				- if @entries.present? && @entries.first
+					tbody
+						- @entries.each do |content|
+							tr class="tr_#{content.first[1]}"
 								td
-									span class="#{edited(key,value)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="#{develop_manage_path(content.values.first)}"
-										= format(value)
+									label
+										input type="checkbox" class="edit_checkbox" value="#{content.first[1]}" name="edit_id[]"
+								- content.each do |key,value|
+									td
+										span class="#{edited(key,value)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="#{develop_manage_path(content.values.first)}"
+											= format(value)

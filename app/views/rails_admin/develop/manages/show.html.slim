@@ -1,19 +1,20 @@
 #main
 	#sidebar
 		= render 'menv'
-	#content
+	.content
 		.navbar
 			ul
 				li
-					= link_to '', "", class: 'content', title: '内容'
+					= link_to image_tag("edit.png"), "", class: 'btn_content', title: '内容'
 				li
-					= link_to '', "", class: 'query', title: '查询'
-				
+					= link_to image_tag("add.png"), new_develop_manage_path(id: RailsAdmin::Client.table_name), class: 'btn_new', title: '添加'
+
 		= render 'filter'
+
 		.nav#nav
 			| #{@content}
 			.details#grid_search
-				form action="#{develop_manage_path}" method="delete" id="details_form" remote="true"
+				form action="#{develop_manage_path(params[:id])}" method="delete" id="details_form" remote="true"
 					input type="hidden" value="#{RailsAdmin::Client.table_name}" name="table_name"
 					table#edit_tables.table-bordered.table.table-hover
 						thead

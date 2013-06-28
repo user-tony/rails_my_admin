@@ -17,7 +17,10 @@ options_select_data = (x) ->
 remove_tr = (id) ->
 	$('.tr_'+id).fadeToggle("slow", "linear");
 
-checked_status = -> $('#btn_delete').attr('disabled', !$('#edit_tables .edit_checkbox:checked').length > 0)
+checked_status = -> 
+	$('#btn_delete').attr('disabled', !$('#edit_tables .edit_checkbox:checked').length > 0)
+	$('#select_num').html $('#edit_tables .edit_checkbox:checked').length || 0
+	
 
 $(document).ready ->
 	if document.getElementById("search-textarea")
@@ -31,8 +34,9 @@ $(document).ready ->
 		editor.setOption("theme", 'twillght');
 
 	$('span.edit_datepicker').on 'click', 'textarea', -> $(this).dynDateTime()
+	$('.row-fluid .datetime').on 'click', -> $(this).dynDateTime()
 
-	height = Math.floor($('#content #nav').height()/40)+18
+	height = Math.floor($('.content #nav').height()/40)+18
 	if ($('.main-menu-span .well ul li').size() > height)
 		$('.main-menu-span .well ul li:gt('+height+')').slideToggle();
 		$('.main-menu-span .well ul li:eq('+height+')').after('<li> <a href="#" id="more">查看更多....</a></li>');
@@ -41,17 +45,24 @@ $(document).ready ->
 			false
 		false
 
-
-
-	$('#field option:first').click()
 	checked_status()
 
 	$('#field').on 'click', 'option',  -> $('#calc').html(options_select_data($(this).attr('column_type')))
-	$('#edit_tables').on 'click', '.edit_checkbox', -> checked_status()
+	$('#edit_tables').on 'click', '.edit_checkbox', ->
+		$(this).parents('tr').toggleClass('active')
+		checked_status()
+
 	$('#edit_tools').on 'click', '.deselect', ->
 		$('#edit_tables .edit_checkbox:checked').attr('checked', false)
 		checked_status()
+		for input_check in $('#edit_tables .edit_checkbox')
+			do (input_check) ->
+				$(input_check).parents('tr').removeClass("active")
 		false
+
+	for input_check in $('#edit_tables .edit_checkbox:checked')
+		do (input_check) ->
+			$(input_check).parents('tr').addClass("active")
 
 	$('#btn_delete').on 'click', ->
 		return false if $(this).attr('disabled')
@@ -59,8 +70,10 @@ $(document).ready ->
 			$.ajax
 				url: $('#details_form').attr("action"), data: $('#details_form').serialize(), type: 'delete', dataType: 'json',
 				success: (data) -> remove_tr id for id in data
+			checked_status()
 		false
 
+	$('#field option:first').click()
 
 
 	false

@@ -21,7 +21,7 @@ class RailsAdmin::Client < Mysql2::Client
 
 	def self.limit(query_sql, page=1, stint)
 		page = page == 1 ? page = 0 : page.to_i*stint.to_i-stint.to_i
-		query_sql.downcase.match(Syntax).present? ? query_sql.downcase.gsub(Syntax, "limit #{page},#{stint}") : "#{query_sql} LIMIT #{page},#{stint}"
+		query_sql.downcase.match(Syntax).present? ? query_sql.downcase.gsub(Syntax, "LIMIT #{page},#{stint}") : "#{query_sql} LIMIT #{page},#{stint}"
 	end
 
 	def self.get_tables
@@ -55,6 +55,12 @@ class RailsAdmin::Client < Mysql2::Client
 	def self.delete(table_name, ids)
 		conn.origin_query("DELETE FROM #{table_name} WHERE id IN (#{ids.join(',')})") if ids.is_a?(Array)
 	end
+
+	def self.insert(table_name, field)
+		conn.origin_query("INSERT INTO #{table_name} (#{field.keys.join(',')}) VALUES ('#{field.values.join("','")}')")
+	end
+
+
 
 
 end

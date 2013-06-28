@@ -1,4 +1,5 @@
 html {overflow-y:scroll;}
+
 body { font-family: Verdana, sans-serif; font-size: 12px; color:#484848; margin: 0; padding: 0; min-width: 900px; }
 a{text-decoration:none;}
 h1, h2, h3, h4 {font-family: "Trebuchet MS", Verdana, sans-serif;padding: 2px 10px 1px 0px;margin: 0 0 10px 0;}
@@ -26,21 +27,22 @@ body {
 #header a {color:#f8f8f8;}
 #header h1 a.ancestor { font-size: 80%; } 
  
-#content { width: 75%; background-color: #fff; margin: 0px; border-right: 1px solid #ddd; padding: 6px 10px 10px 10px; z-index: 10; float: right; }
+#main .content { width: 75%; background-color: #fff; margin: 0px; border-right: 1px solid #ddd; padding: 6px 10px 10px 10px; z-index: 10; float: right; }
 * html #content{ width: 75%; padding-left: 0; margin-top: 0px; padding: 6px 10px 10px 10px;}
+
 /*html>body #content { min-height: 600px; }*/
 #main{display: block; position: relative; }
-#wrapper3 #main #content{
+#wrapper3 #main .content{
 	float: right;
 	width: 79%;
 	padding: 0px;
 	margin: 10px 0;
 }
 #sidebar{ float: left; padding: 0; margin: 0; width: 19%;}
-* html body #content { height: 600px; min-height: 600px; } /* IE */
+* html body .content { height: 600px; min-height: 600px; } /* IE */
 
 #main.nosidebar #sidebar{ display: none; }
-#main.nosidebar #content{ width: auto; border-right: 0; }
+#main.nosidebar .content{ width: auto; border-right: 0; }
 
 #footer {clear: both; border-top: 1px solid #bbb; font-size: 0.9em; color: #aaa; padding: 5px; text-align:center; background:#fff;}
 
@@ -92,174 +94,6 @@ table p {margin:0;}
 .even {background-color: #fff;}
 
 
-a.sort { padding-right: 16px; background-position: 100% 50%; background-repeat: no-repeat; }
-a.sort.asc  { background-image: url(file_icon/sort_asc.png); }
-a.sort.desc { background-image: url(file_icon/sort_desc.png); }
- 
-table.messages td.author, table.messages td.created_on, table.messages td.reply-count {text-align:center;}
-
-table.query-columns {
-	border-collapse: collapse;
-	border: 0;
-}
-
-td.radio_span{
-	float: none;
-	width:  50px;
-}
-span.float_left{
-	float: left;
-}
-span.float_right{
-	float: right;
-}
-
-
-table.filecontent { border: 1px solid #e2e2e2;  border-collapse: collapse; width:98%; background-color: #fafafa; }
-table.filecontent tbody {font-family:"Liberation Mono", Courier, monospace; font-size:12px;}
-table.filecontent th { border: 1px solid #e2e2e2; background-color: #eee; }
-table.filecontent th.filename { background-color: #e4e4d4; text-align: left; padding:5px;}
-table.filecontent tr.spacing th { text-align:center; }
-table.filecontent tr.spacing td { height: 0.4em; background: #EAF2F5;}
-table.filecontent th.line-num {
-		border: 1px solid #e2e2e2;
-		text-align: right;
-		width: 2%;
-		padding: 0 3px 0 0;
-		color: #999;
-		user-select: none;
-		-moz-user-select: none;
-		-o-user-select: none;
-		-ms-user-select: none;
-		-webkit-user-select: none;
-		font-weight:normal;
-}
-table.filecontent th.line-num a {
-		text-decoration: none;
-		color: inherit;
-}
-table.filecontent td.line-code {padding: 0 0 0 4px;}
-table.filecontent td.line-code pre {
-		margin: 0px;
-		white-space: pre-wrap;
-		font-family:"Liberation Mono", Courier, monospace; font-size:12px;
-}
-
-
-/***** Diff *****/
-.diff_out { background: #fcc; }
-.diff_out span { background: #faa; }
-.diff_in { background: #cfc; }
-.diff_in span { background: #afa; }
-
-.text-diff {
-	padding: 1em;
-	background-color:#f6f6f6;
-	color:#505050;
-	border: 1px solid #e4e4e4;
-}
-
-
-table.revision-info td {
-		margin:  0px;
-		padding: 0px;
-}
-
-div.revision-graph { position: absolute; min-width: 1px; }
-
-div.changeset-changes ul { margin: 0; padding: 0; }
-div.changeset-changes ul > ul { margin-left: 18px; padding: 0; }
-
-li.change {
-		list-style-type:none;
-		background-image: url(file_icon/bullet_black.png);
-		background-position: 1px 1px;
-		background-repeat: no-repeat;
-		padding-top: 1px;
-		padding-bottom: 1px;
-		padding-left: 20px;
-		margin: 0;
-}
-li.change.folder { background-image: url(file_icon/folder_open.png); }
-li.change.folder.change-A { background-image: url(file_icon/folder_open_add.png); }
-li.change.folder.change-M { background-image: url(file_icon/folder_open_orange.png); }
-li.change.change-A { background-image: url(file_icon/bullet_add.png); }
-li.change.change-M { background-image: url(file_icon/bullet_orange.png); }
-li.change.change-C { background-image: url(file_icon/bullet_blue.png); }
-li.change.change-R { background-image: url(file_icon/bullet_purple.png); }
-li.change.change-D { background-image: url(file_icon/bullet_delete.png); }
-
-li.change .copied-from { font-style: italic; color: #999; font-size: 0.9em; }
-li.change .copied-from:before { content: " - "}
-
-#changes-legend { float: right; font-size: 0.8em; margin: 0; }
-#changes-legend li { float: left; background-position: 5px 0; }
-
-table.filecontent { border: 1px solid #e2e2e2;  border-collapse: collapse; width:98%; background-color: #fafafa; }
-table.filecontent tbody {font-family:"Liberation Mono", Courier, monospace; font-size:12px;}
-table.filecontent th { border: 1px solid #e2e2e2; background-color: #eee; }
-table.filecontent th.filename { background-color: #e4e4d4; text-align: left; padding:5px;}
-table.filecontent tr.spacing th { text-align:center; }
-table.filecontent tr.spacing td { height: 0.4em; background: #EAF2F5;}
-table.list td.filename{ padding-left: 100px !important ; text-align:  left; width: 200px}
-table.list td.comments{ text-align:  left}
-table.filecontent th.line-num {
-		border: 1px solid #e2e2e2;
-		text-align: right;
-		width: 2%;
-		padding: 0 3px 0 0;
-		color: #999;
-		user-select: none;
-		-moz-user-select: none;
-		-o-user-select: none;
-		-ms-user-select: none;
-		-webkit-user-select: none;
-		font-weight:normal;
-}
-table.filecontent th.line-num a {
-		text-decoration: none;
-		color: inherit;
-}
-table.filecontent td.line-code {padding: 0 0 0 4px;}
-table.filecontent td.line-code pre {
-		margin: 0px;
-		white-space: pre-wrap;
-		font-family:"Liberation Mono", Courier, monospace; font-size:12px;
-}
-
-/* 12 different colors for the annonate view */
-table.annotate tr.bloc-0 {background: #FFFFBF;}
-table.annotate tr.bloc-1 {background: #EABFFF;}
-table.annotate tr.bloc-2 {background: #BFFFFF;}
-table.annotate tr.bloc-3 {background: #FFD9BF;}
-table.annotate tr.bloc-4 {background: #E6FFBF;}
-table.annotate tr.bloc-5 {background: #BFCFFF;}
-table.annotate tr.bloc-6 {background: #FFBFEF;}
-table.annotate tr.bloc-7 {background: #FFE6BF;}
-table.annotate tr.bloc-8 {background: #FFE680;}
-table.annotate tr.bloc-9 {background: #AA80FF;}
-table.annotate tr.bloc-10 {background: #FFBFDC;}
-table.annotate tr.bloc-11 {background: #BFE4FF;}
-
-table.annotate td.revision {
-		padding:0;
-		text-align: center;
-		width: 2%;
-		padding-left: 1em;
-		background: inherit;
-}
-
-table.annotate td.author {
-		padding:0;
-		text-align: center;
-		border-right: 1px solid #d7d7d7;
-		white-space: nowrap;
-		padding-left: 1em;
-		padding-right: 1em;
-		width: 3%;
-		background: inherit;
-}
-
 
 #sidebar h3{
 		padding: 20px;
@@ -271,23 +105,6 @@ table.annotate td.author {
 
 }
 
-/* nav  */
-div.nav{
-	background-image: linear-gradient(to bottom, #ffffff, #f2f2f2) ;
-	padding: 5px;
-	margin: 10px 0px 10px 0px;
-	font-size: 18px;
-}
-div.nav a{
-	margin-left: 3px;
-}
-
-#content h5{
-	padding: 3px;
-	width: 160px;
-	text-align: center;
-	background-color: #D2E9FF;
-}
 th {
     font-weight: bold;
     color: #000;
@@ -305,46 +122,6 @@ form {
     margin: 0;
     display: inline;
 }
-
-
-background-size: 100% 100%;
-background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc));
-background: -webkit-linear-gradient(top, #ffffff, #cccccc);
-background: -moz-linear-gradient(top, #ffffff, #cccccc);
-background: -ms-linear-gradient(top, #ffffff, #cccccc);
-background: -o-linear-gradient(top, #ffffff, #cccccc);}
-
-input[type=submit]:hover,
-button[type=submit]:not(.mult_submit):hover,
-input[type=reset]:hover,
-input[name=submit_reset]:hover,
-input.button:hover {
-    position: relative;
-    background-image: url(./themes/svg_gradient.php?from=cccccc&to=dddddd);
-background-size: 100% 100%;
-background: -webkit-gradient(linear, left top, left bottom, from(#cccccc), to(#dddddd));
-background: -webkit-linear-gradient(top, #cccccc, #dddddd);
-background: -moz-linear-gradient(top, #cccccc, #dddddd);
-background: -ms-linear-gradient(top, #cccccc, #dddddd);
-background: -o-linear-gradient(top, #cccccc, #dddddd);    cursor: pointer;
-}
-
-textarea {
-    overflow: visible;
-    height: 24em;
-}
-
-textarea.char {
-    height: 3em;
-}
-.some-margin {
-    margin: 1.5em;
-}
-
-
-
-
-/* STOP */
 
 /* The rest of this file contains styles related to the mechanics of
    the editor. You probably shouldn't touch them. */
@@ -543,7 +320,7 @@ div.nav a{
   margin-left: 3px;
 }
 
-#content h5{
+.content h5{
   padding: 3px;
   width: 160px;
   text-align: center;
@@ -623,6 +400,7 @@ span.author-name{
   border-spacing: 0;
   background-color: #DDD;
   text-align: center;
+  border: 1px solid #d4d4d4;
 }
 
 
@@ -631,31 +409,10 @@ span.author-name{
   margin-left: 100px;
 }
 
-#content ul{
-  margin: 30px 10px;
+.content ul{
+  margin: 10px 10px;
 }
 
-.navbar { min-height: 40px}
-.navbar ul .content{
-  padding: 26px;
-  height: 37px;
-  width: 79px;
-  background: #DDD url("/assets/content.jpg") no-repeat -199px 0;
-}
-
-.navbar ul .query{
-  padding: 26px;
-  height: 37px;
-  width: 79px;
-  background: #DDD url("/assets/content.jpg") no-repeat -74px -64px;
-}
-
-
-.navbar ul li{
-  list-style-type: none;
-  display: inline;
-  margin: 2px;
-}
 
 .pagination {
     display: inline;
@@ -664,3 +421,39 @@ span.author-name{
     vertical-align: top;
 }
 
+.table tr.active{
+  background-color: #F0F0F0;
+  font-weight: bold;
+}
+
+#edit_tools span label{
+  float: right;
+  display: inline;
+  margin-right: 200px;
+  vertical-align: top;
+  margin-top: 10px;
+}
+
+#edit_tools label #select_num{
+  width: 0px;
+  margin: 0px;
+  font-weight: bold;
+}
+
+.content .search{
+  padding: 12px;
+  margin: 2px;
+}
+
+.content .navbar ul li{
+  display: inline;
+  padding: 5px;
+}
+
+.content .details{
+  overflow: auto;
+}
+
+.table tr{
+  background-color: #FFF;
+}
