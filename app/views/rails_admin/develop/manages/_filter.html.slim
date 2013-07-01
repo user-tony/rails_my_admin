@@ -1,6 +1,5 @@
 .search
 	= form_tag "", method: :post, class: 'form-search', method: :get
-		/ = label_tag 'field', image_tag('search.png'), class: 'span1'
 		= select_tag 'field', options_for_select_column_data(params[:id], params[:field]), class: 'span2'
 		= select_tag 'calc', options_for_select([params[:calc]]), class: 'span2'
 		= text_field_tag :q, params[:q], class: 'input-medium search-query span7'

@@ -49,17 +49,19 @@ module ActionView
 			end
 
 
-			def content_field(column)
+			def content_field(column, value=nil)
 				type = column["Type"].gsub(/\(.*?\)/,'')
+				column["Default"] = value if value
+				column["Field"] = "field[#{column["Field"]}]"
 				case type
 				when 'text'
-					text_area_tag column["Field"], column["Default"],  class: "#{type} span4"
+					text_area_tag column["Field"], column["Default"], :size => "25x6", class: "#{type} span4"
 				when 'varchar'
 					text_field_tag column["Field"], column["Default"], class: "#{type} span4"
 				when 'int'
 					number_field_tag column["Field"], column["Default"], class: "#{type} span4"
 				when 'tinyint'
-					select_tag column["Field"], options_for_select([['是',1],['否',0]]), class: "#{type} span4"
+					select_tag column["Field"], options_for_select([['Yes',1],['No',0]]), class: "#{type} span4"
 				else
 					text_field_tag column["Field"], column["Default"], class: "#{type} span4"
 				end

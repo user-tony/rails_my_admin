@@ -9,6 +9,11 @@ class RailsAdmin::Develop::ManagesController < RailsAdmin::Develop::ApplicationC
 		flash[:errors] = e.message
 	end
 
+	def filter
+		RailsAdmin::Client.query_str = params[:q]
+		redirect_to action: :index
+	end
+
 	def show
 		@query_str = "SELECT * FROM #{params[:id]}"
 		@query_str = RailsAdmin::Client.compose(params) if params[:q].present? && params[:field].present?
@@ -18,12 +23,30 @@ class RailsAdmin::Develop::ManagesController < RailsAdmin::Develop::ApplicationC
 		flash[:errors] = e.message
 	end
 
-	def filter
-		RailsAdmin::Client.query_str = params[:q]
-		redirect_to action: :index
+	def new;end
+
+	def edit; end
+
+	def create
+		RailsAdmin::Client.insert(params[:table_name], params[:field])
+		flash[:success] = "成功添加#{params[:table_name]}一条数据。"
+	rescue Exception => e
+		flash[:errors] = e.message
+	ensure
+		redirect_to develop_manage_path(params[:table_name])
 	end
 
 	def update
+		RailsAdmin::Client.update(params[:table_name], params[:id], params[:field])
+		flash[:success] = "更新#{params[:id]}内容成功。"
+	rescue Exception => e
+		flash[:errors] = e.message
+	ensure
+		redirect_to develop_manage_path(params[:table_name])
+	end
+
+
+	def update_field
 		RailsAdmin::Client.conn.origin_query("UPDATE #{params[:table]} SET #{params[:field]} = REPLACE(REPLACE(REPLACE('#{params[:value]}', '&','&amp;'), '>', '&gt;'), '<', '&lt;') WHERE id = #{params[:id]}")
 		render text: 'success'
 	end
@@ -33,18 +56,10 @@ class RailsAdmin::Develop::ManagesController < RailsAdmin::Develop::ApplicationC
 		render json: params[:edit_id]
 	end
 
-	def new;end
-
-	def create
-		RailsAdmin::Client.insert(params[:table_name], params[:field])
-		flash[:success] = "成功添加#{params[:table_name]}一条数据"
-		redirect_to develop_manage_path(params[:table_name])
-	rescue Exception => e
-		flash[:errors] = e.message
-	end
+	private
 
 	def find_params
-		@page , @per = (params[:page] || 1).to_i, (params[:per] || 100).to_i
+		@page, @per = (params[:page] || 1).to_i, (params[:per] || 100).to_i
 	end
 
 end

@@ -33,21 +33,22 @@ class RailsAdmin::Client < Mysql2::Client
 	end
 
 	def self.compose_key(params)
+		where = "WHERE #{params[:field]}"
 		case params[:calc]
 		when '=', '>', '<'
-			"WHERE #{params[:field]} #{params[:calc]} '#{params[:q]}' "
+			"#{where} #{params[:calc]} '#{params[:q]}' "
 		when 'IN'
-			"WHERE #{params[:field]} #{params[:calc]} (#{params[:q]}) "
+			"#{where} #{params[:calc]} (#{params[:q]}) "
 		when '≠'
-			"WHERE #{params[:field]} != '#{params[:q]}'"
+			"#{where} != '#{params[:q]}'"
 		when 'LIKE'
-			"WHERE #{params[:field]} LIKE '%#{params[:q]}%'"
+			"#{where} LIKE '%#{params[:q]}%'"
 		when 'IS NULL'
-			"WHERE #{params[:field]} IS NULL"
+			"#{where} IS NULL"
 		when '≥'
-			"WHERE #{params[:field]} >= '#{params[:q]}'"
+			"#{where} >= '#{params[:q]}'"
 		when '≤'
-			"WHERE #{params[:field]} <= '#{params[:q]}'"
+			"#{where} <= '#{params[:q]}'"
 		end
 	end
 
@@ -60,7 +61,9 @@ class RailsAdmin::Client < Mysql2::Client
 		conn.origin_query("INSERT INTO #{table_name} (#{field.keys.join(',')}) VALUES ('#{field.values.join("','")}')")
 	end
 
-
+	def self.update(table_name, id, field)
+		conn.origin_query("UPDATE #{table_name} SET #{field.map{|a| "#{a[0]} = '#{a[1]}'" }.join(',')} WHERE id = #{id}")
+	end
 
 
 end

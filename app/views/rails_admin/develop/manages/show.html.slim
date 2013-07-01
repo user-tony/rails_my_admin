@@ -2,12 +2,7 @@
 	#sidebar
 		= render 'menv'
 	.content
-		.navbar
-			ul
-				li
-					= link_to image_tag("edit.png"), "", class: 'btn_content', title: '内容'
-				li
-					= link_to image_tag("add.png"), new_develop_manage_path(id: RailsAdmin::Client.table_name), class: 'btn_new', title: '添加'
+		= render 'navbar'
 
 		= render 'filter'
 
@@ -32,5 +27,8 @@
 												input type="checkbox" class="edit_checkbox" value="#{content.first[1]}" name="edit_id[]"
 										- content.each do |key,value|
 											td
-												span class="#{edited(key,value)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="#{develop_manage_path(content.values.first)}"
-													= format(value)
+												span class="#{edited(key,value)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="#{update_field_develop_manage_path(content.values.first)}"
+													- if key == "id"
+														= link_to value, edit_develop_manage_path(value,table_name: RailsAdmin::Client.table_name), title: '编辑'
+													- else
+														= format(value)

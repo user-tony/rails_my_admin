@@ -1,0 +1,6 @@
+.navbar
+	ul
+		li
+			= link_to image_tag("edit.png"), develop_manage_path(RailsAdmin::Client.table_name), class: 'btn_content', title: '内容'
+		li
+			= link_to image_tag("add.png"), new_develop_manage_path(id: RailsAdmin::Client.table_name), class: 'btn_new', title: '添加'

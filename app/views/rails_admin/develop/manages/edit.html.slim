@@ -1,0 +1,19 @@
+#main
+	#sidebar
+		= render 'menv'
+	.content
+		= render 'navbar'
+
+		.row-fluid
+			= form_tag(develop_manage_path(params[:id]), method: :put)
+				= field_set_tag "数据表[#{params[:table_name]}]" do
+					= hidden_field_tag 'table_name', params[:table_name]
+					- columns = RailsAdmin::Client.conn.origin_query("DESC #{params[:table_name]}").each
+					- RailsAdmin::Client.conn.origin_query("SELECT * FROM #{params[:table_name]} WHERE id = #{params[:id]}").each[0].map do |key,value|
+						- if key == "id"
+							= hidden_field_tag :id, value
+						- else
+							= label_tag "field[#{key}]", key
+							= content_field(columns.select{|c| c["Field"] == key }.first ,value)
+					.controllers
+						= submit_tag '保存', class: 'btn btn-primary'

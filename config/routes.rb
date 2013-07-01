@@ -3,6 +3,7 @@ RailsAdmin::Engine.routes.draw do
 	namespace :develop do
 		resources :manages do
 			post :filter, on: :collection
+			put :update_field, on: :member
 		end
 	end
 end
