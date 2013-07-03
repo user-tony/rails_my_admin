@@ -1,34 +1,27 @@
-#main
-	#sidebar
-		= render 'menv'
-	.content
-		= render 'navbar'
 
-		= render 'filter'
-
-		.nav#nav
-			| #{@content}
-			.details#grid_search
-				form action="#{develop_manage_path(params[:id])}" method="delete" id="details_form" remote="true"
-					input type="hidden" value="#{RailsAdmin::Client.table_name}" name="table_name"
-					table#edit_tables.table-bordered.table.table-hover
-						thead
-							tr#th-title
-								th 序号
-								- @fields.map do |element|
-									th
-										= element["Field"]
-						- if @entries.present? && @entries.first
-							tbody
-								- @entries.each do |content|
-									tr class="tr_#{content.first[1]}"
-										td
-											label
-												input type="checkbox" class="edit_checkbox" value="#{content.first[1]}" name="edit_id[]"
-										- content.each do |key,value|
-											td
-												span class="#{edited(key,value)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="#{update_field_develop_manage_path(content.values.first)}"
-													- if key == "id"
-														= link_to value, edit_develop_manage_path(value,table_name: RailsAdmin::Client.table_name), title: '编辑'
-													- else
-														= format(value)
+.nav#nav
+	| #{@content}
+	.details#grid_search
+		form action="#{develop_manage_path(params[:id])}" method="delete" id="details_form" remote="true"
+			input type="hidden" value="#{RailsAdmin::Client.table_name}" name="table_name"
+			table#edit_tables.table-bordered.table.table-hover
+				thead
+					tr#th-title
+						th 序号
+						- @fields.map do |element|
+							th
+								= element["Field"]
+				- if @entries.present? && @entries.first
+					tbody
+						- @entries.each do |content|
+							tr class="tr_#{content.first[1]}"
+								td
+									label
+										input type="checkbox" class="edit_checkbox" value="#{content.first[1]}" name="edit_id[]"
+								- content.each do |key,value|
+									td
+										span class="#{edited(key,value)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="#{update_field_develop_manage_path(content.values.first)}"
+											- if key == "id"
+												= link_to value, edit_develop_manage_path(value,table_name: RailsAdmin::Client.table_name), title: '编辑'
+											- else
+												= format(value)

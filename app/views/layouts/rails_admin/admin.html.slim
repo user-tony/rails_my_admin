@@ -6,7 +6,7 @@ html
 		= stylesheet_link_tag "rails_admin", media: "all"
 		= javascript_include_tag 'rails_admin'
 		= csrf_meta_tag
-	body.controller-projects.action-show
+	body
 		#wrapper
 			#wrapper2
 				#wrapper3
@@ -33,7 +33,20 @@ html
 							strong
 								| 成功:
 								= flash[:notice]
-					= yield
+				.container-fluid
+					.row-fluid
+						.span2
+							= render 'menv'
+						.content.span10
+							- if action_name =~ /query/
+								= render 'form'
+							- elsif action_name =~ /index/
+							- else
+								= render 'navbar'
+							- if action_name =~ /show/
+								= render 'filter'
+							.span11
+								= yield
 	- if @entries.present?
 		#edit_tools
 			span
@@ -42,6 +55,4 @@ html
 				= link_to 'ⓧ', "#", class: 'btn deselect', title: '取消选择'
 				= link_to '✘', "", class: 'btn', title: '删除', disabled: true, id: "btn_delete"
 			span
-				/ # = link_to '✔', "#", class: 'btn', title: '保存', disabled: true
-				/ # = link_to '✚', new_develop_manage_path(id: RailsAdmin::Client.table_name), class: 'btn', title: '添加'
 				= @entries.present? ? custom_paginate(@entries, spage: @page, stint: @per) : '0条数据'

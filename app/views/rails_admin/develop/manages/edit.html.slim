@@ -1,10 +1,10 @@
-#main
-	#sidebar
+.row-fluid
+	.span2
 		= render 'menv'
-	.content
+	.content.span10
 		= render 'navbar'
 
-		.row-fluid
+		.span8
 			= form_tag(develop_manage_path(params[:id]), method: :put)
 				= field_set_tag "数据表[#{params[:table_name]}]" do
 					= hidden_field_tag 'table_name', params[:table_name]

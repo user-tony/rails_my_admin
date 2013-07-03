@@ -20,24 +20,33 @@ body {
     margin: 0;
     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2);
 }
- 
+
+.container-fluid .content{
+  background-color: #FFF;
+  margin: 10px 0;
+  padding: 0;
+} 
+
+
+
+
 #account {float:right;}
 
 #header {min-height:5.3em;margin:0;background-color:#628DB6;color:#f8f8f8; padding: 4px 8px 20px 6px; position:relative;}
 #header a {color:#f8f8f8;}
 #header h1 a.ancestor { font-size: 80%; } 
  
-#main .content { width: 75%; background-color: #fff; margin: 0px; border-right: 1px solid #ddd; padding: 6px 10px 10px 10px; z-index: 10; float: right; }
-* html #content{ width: 75%; padding-left: 0; margin-top: 0px; padding: 6px 10px 10px 10px;}
+/*#main .content { width: 75%; background-color: #fff; margin: 0px; border-right: 1px solid #ddd; padding: 6px 10px 10px 10px; z-index: 10; float: right; }*/
+/** html #content{ width: 75%; padding-left: 0; margin-top: 0px; padding: 6px 10px 10px 10px;}*/
 
 /*html>body #content { min-height: 600px; }*/
 #main{display: block; position: relative; }
-#wrapper3 #main .content{
+/*#wrapper3 #main .content{
 	float: right;
 	width: 79%;
 	padding: 0px;
 	margin: 10px 0;
-}
+}*/
 #sidebar{ float: left; padding: 0; margin: 0; width: 19%;}
 * html body .content { height: 600px; min-height: 600px; } /* IE */
 

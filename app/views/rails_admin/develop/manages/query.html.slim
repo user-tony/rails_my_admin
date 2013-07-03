@@ -1,28 +1,24 @@
-#main
-	#sidebar
-		= render 'menv'
-	.content
-		= render 'form'
-		- if @entries.present? && @entries.first
-			.nav#nav
-				| #{@content}
-				.details#grid_search
-					form action="#{develop_manage_path(RailsAdmin::Client.table_name)}" method="delete" id="details_form" remote="true"
-						input type="hidden" value="#{RailsAdmin::Client.table_name}" name="table_name"
-						table#edit_tables.table-bordered.table.table-hover
-							thead
-								tr#th-title
-									- @entries.first.keys.each do |entry|
-										th
-											= entry
-							- if @entries.present? && @entries.first
-								tbody
-									- @entries.each do |content|
-										tr class="tr_#{content.first[1]}"
-											td
-												label
-													input type="checkbox" class="edit_checkbox" value="#{content.first[1]}" name="edit_id[]"
-											- content.each do |key,value|
-												td
-													span class="#{edited(key,value)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="#{develop_manage_path(content.values.first)}"
-														= format(value)
+- if @entries.present? && @entries.first
+	.nav#nav
+		| #{@content}
+		.details#grid_search
+			form action="#{develop_manage_path(RailsAdmin::Client.table_name)}" method="delete" id="details_form" remote="true"
+				input type="hidden" value="#{RailsAdmin::Client.table_name}" name="table_name"
+				table#edit_tables.table-bordered.table.table-hover
+					thead
+						tr#th-title
+							th 序号
+							- @entries.first.keys.each do |entry|
+								th
+									= entry
+					- if @entries.present? && @entries.first
+						tbody
+							- @entries.each do |content|
+								tr class="tr_#{content.first[1]}"
+									td
+										label
+											input type="checkbox" class="edit_checkbox" value="#{content.first[1]}" name="edit_id[]"
+									- content.each do |key,value|
+										td
+											span class="#{edited(key,value)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="#{develop_manage_path(content.values.first)}"
+												= format(value)
