@@ -1,0 +1,39 @@
+#main
+	#sidebar
+		= render 'menv'
+	.content
+		= render 'navbar'
+
+		.nav#nav
+			| #{@content}
+			.details#grid_search
+				form action="#{develop_manage_path(params[:id])}" method="delete" id="details_form" remote="true"
+					input type="hidden" value="#{RailsAdmin::Client.table_name}" name="table_name"
+					table#edit_tables.table-bordered.table.table-hover
+						thead
+							tr#th-title
+								th 序号
+								th 字段
+								th 类型
+								th 是否为空
+								th 是否为主健
+								th 默认值
+								th 扩展
+						- if @fields.present?
+							tbody
+								- @fields.each_with_index do |field,index|
+									tr
+										td
+											= index + 1
+										td
+											= field["Field"]
+										td
+											= field["Type"]
+										td
+											= field["Null"]
+										td
+											= field["key"]
+										td
+											= field["Default"]
+										td
+											= field["extra"]

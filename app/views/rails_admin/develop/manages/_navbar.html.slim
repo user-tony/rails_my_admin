@@ -1,6 +1,33 @@
 .navbar
 	ul
 		li
-			= link_to image_tag("edit.png"), develop_manage_path(RailsAdmin::Client.table_name), class: 'btn_content', title: '内容'
+			= link_to develop_manages_path, class: 'btn-icon', title: 'Home' do
+				dt = image_tag("home.png")
+				dd Home
+
 		li
-			= link_to image_tag("add.png"), new_develop_manage_path(id: RailsAdmin::Client.table_name), class: 'btn_new', title: '添加'
+			= link_to new_develop_manage_path(id: RailsAdmin::Client.table_name), class: 'btn-icon', title: 'add' do
+				dt = image_tag("add.png")
+				dd Add
+
+		li 
+			= link_to develop_manage_path(RailsAdmin::Client.table_name), class: 'btn-icon', title: 'Content' do
+				dt = image_tag("content.png")
+				dd Content
+
+		li
+			= link_to edit_column_develop_manage_path(RailsAdmin::Client.table_name), class: 'btn-icon', title: 'Structure' do
+				dt = image_tag("setting.png")
+				dd Structure
+
+		li
+			= link_to details_develop_manage_path(RailsAdmin::Client.table_name), class: 'btn-icon', title: 'Table info' do
+				dt = image_tag("details.png")
+				dd Table info
+
+		li
+			= link_to query_develop_manages_path, class: 'btn-icon', title: 'Query' do
+				dt = image_tag("search.png")
+				dd Query
+
+div style="clear:both"

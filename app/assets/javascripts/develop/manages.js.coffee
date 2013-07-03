@@ -16,6 +16,9 @@ options_select_data = (x) ->
 
 remove_tr = (id) ->
 	$('.tr_'+id).fadeToggle("slow", "linear");
+	$('#edit_tables .edit_checkbox:checked').attr('checked', false)
+	checked_status()
+
 
 checked_status = -> 
 	$('#btn_delete').attr('disabled', !$('#edit_tables .edit_checkbox:checked').length > 0)
@@ -70,10 +73,8 @@ $(document).ready ->
 			$.ajax
 				url: $('#details_form').attr("action"), data: $('#details_form').serialize(), type: 'delete', dataType: 'json',
 				success: (data) -> remove_tr id for id in data
-			checked_status()
 		false
 
 	$('#field option:first').click()
-
 
 	false

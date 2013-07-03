@@ -15,7 +15,6 @@ module RailsAdmin
 				helpers.content_tag :ul do
 					result = ''
 					result += helpers.content_tag(:li, class: 'previous'){helpers.link_to("‹ 上一页","#{url}?#{param_name}=#{current_page-1}")} if current_page.to_i > 1
-					
 					if total_pages > 8
 						1.upto(3) { |i| result << page_link(i, current_page) }
 						if current_page > 1 and current_page < total_pages
@@ -31,12 +30,8 @@ module RailsAdmin
 					else
 						(1..total_pages).each{ |i| result << page_link(i, current_page) }
 					end
-					result += helpers.content_tag :li, :class => "next" do
-											helpers.link_to("下一页 ›", "#{url}?#{param_name}=#{current_page+1}")
-										end if current_page < total_pages
-					result += helpers.content_tag :li, class: 'disabled total_pages' do
-											helpers.link_to "共#{RailsAdmin::Client.total_nums}条数据", "#"
-										end
+					result += helpers.content_tag(:li, class: "next"){helpers.link_to("下一页 ›", "#{url}?#{param_name}=#{current_page+1}")} if current_page < total_pages
+					result += helpers.content_tag(:li, class: 'disabled total_pages'){helpers.link_to "共#{RailsAdmin::Client.total_nums}条数据", "#"}
 					result.html_safe
 				end
 			end

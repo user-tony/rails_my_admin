@@ -3,6 +3,11 @@ class RailsAdmin::Develop::ManagesController < RailsAdmin::Develop::ApplicationC
 	before_filter :find_params, except: %w(update create new)
 
 	def index
+		@version = RailsAdmin::Client.conn.origin_query("SELECT Version() as version").each
+	end
+
+
+	def query
 		@entries = RailsAdmin::Client.query(RailsAdmin::Client.query_str,@page, @per).each  if RailsAdmin::Client.query_str
 	rescue Exception => e
 		RailsAdmin::Client.query_str = @q
@@ -11,13 +16,13 @@ class RailsAdmin::Develop::ManagesController < RailsAdmin::Develop::ApplicationC
 
 	def filter
 		RailsAdmin::Client.query_str = params[:q]
-		redirect_to action: :index
+		redirect_to action: :query
 	end
 
 	def show
 		@query_str = "SELECT * FROM #{params[:id]}"
 		@query_str = RailsAdmin::Client.compose(params) if params[:q].present? && params[:field].present?
-		@fields = RailsAdmin::Client.conn.origin_query("desc #{params[:id]}").each
+		@fields = RailsAdmin::Client.desc_table params[:id]
 		@entries = RailsAdmin::Client.query(@query_str,@page, @per)
 	rescue Exception => e
 		flash[:errors] = e.message
@@ -26,6 +31,14 @@ class RailsAdmin::Develop::ManagesController < RailsAdmin::Develop::ApplicationC
 	def new;end
 
 	def edit; end
+
+	def edit_column
+		@fields = RailsAdmin::Client.desc_table params[:id]
+	end
+
+	def details
+		@details = RailsAdmin::Client.conn.origin_query("SHOW TABLE STATUS LIKE '#{params[:id]}'").each
+	end
 
 	def create
 		RailsAdmin::Client.insert(params[:table_name], params[:field])

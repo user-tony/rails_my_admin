@@ -448,6 +448,8 @@ span.author-name{
 .content .navbar ul li{
   display: inline;
   padding: 5px;
+  width: 70px;
+  float: left;
 }
 
 .content .details{
@@ -456,4 +458,14 @@ span.author-name{
 
 .table tr{
   background-color: #FFF;
+}
+
+.navbar a.btn-icon img{
+  width: 54px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.navbar li{
+  text-align: center;
 }

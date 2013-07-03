@@ -15,9 +15,8 @@
 //= require codemirror
 //= require sql
 //= require develop/manages
-
 //= require jquery/jquery.jeditable
 //= require jquery/editable
-//= require dyndatetime/dynDateTime
-//= require dyndatetime/calendar_zh
+//= require jquery/dyndatetime/dynDateTime
+//= require jquery/dyndatetime/calendar_zh
 //= require bootstrap/bootstrap-alert

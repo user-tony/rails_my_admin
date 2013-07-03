@@ -61,8 +61,27 @@ class RailsAdmin::Client < Mysql2::Client
 		conn.origin_query("INSERT INTO #{table_name} (#{field.keys.join(',')}) VALUES ('#{field.values.join("','")}')")
 	end
 
-	def self.update(table_name, id, field)
-		conn.origin_query("UPDATE #{table_name} SET #{field.map{|a| "#{a[0]} = '#{a[1]}'" }.join(',')} WHERE id = #{id}")
+	def self.update(table_name, id, fields)
+		update_str = "UPDATE #{table_name} SET #{compose_update_sql(table_name, fields.to_a)}  WHERE id = #{id}"
+		p update_str
+		p "*" * 40
+		conn.origin_query update_str
+	end
+
+	def self.compose_update_sql(table_name,fields)
+		columns = desc_table(table_name)
+		fields.inject([]) do |array, field|
+			columns.each do |column|
+				if field[0] == column["Field"]
+					array << (%w(int decimal tinyint).include?(column["Type"].gsub(/\(.*?\)/,'')) ? "#{field[0]} = #{field[1]}" : "#{field[0]} = REPLACE(REPLACE(REPLACE('#{field[1]}', '&','&amp;'), '>', '&gt;'), '<', '&lt;')")
+				end
+			end
+			array
+		end.join(',')
+	end
+
+	def self.desc_table(table_name)
+		conn.origin_query("DESC #{table_name}").each
 	end
 
 

@@ -17,3 +17,5 @@
 							= content_field(columns.select{|c| c["Field"] == key }.first ,value)
 					.controllers
 						= submit_tag '保存', class: 'btn btn-primary'
+						.span1
+							= link_to '返回', :back, class: 'btn'
