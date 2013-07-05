@@ -1,10 +1,10 @@
 .span8
 	= form_tag develop_manages_path
-		= field_set_tag "数据表[#{params[:id]}]" do
+		= field_set_tag "Table[#{params[:id]}]" do
 			= hidden_field_tag 'table_name', params[:id]
 			- RailsAdmin::Client.conn.origin_query("DESC #{params[:id]}").each.map do |column|
 				- next if column["Field"] == "id"
 				= label_tag "field[#{column["Field"]}]", column["Field"]
 				= content_field column
 			.controllers
-				= submit_tag '保存', class: 'btn btn-primary'
+				= submit_tag 'Save', class: 'btn btn-primary'

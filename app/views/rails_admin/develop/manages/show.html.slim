@@ -7,7 +7,7 @@
 			table#edit_tables.table-bordered.table.table-hover
 				thead
 					tr#th-title
-						th 序号
+						th Index
 						- @fields.map do |element|
 							th
 								= element["Field"]
@@ -22,6 +22,6 @@
 									td
 										span class="#{edited(key,value)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="#{update_field_develop_manage_path(content.values.first)}"
 											- if key == "id"
-												= link_to value, edit_develop_manage_path(value,table_name: RailsAdmin::Client.table_name), title: '编辑'
+												= link_to value, edit_develop_manage_path(value,table_name: RailsAdmin::Client.table_name), title: 'edit'
 											- else
 												= format(value)

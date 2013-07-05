@@ -3,13 +3,13 @@
 	table#edit_tables.table-bordered.table.table-hover
 		thead
 			tr#th-title
-				th 序号
-				th 字段
-				th 类型
-				th 是否为空
-				th 是否为主健
-				th 默认值
-				th 扩展
+				th index
+				th Field
+				th Type
+				th Null
+				th Key
+				th Default
+				th Extra
 		- if @fields.present?
 			tbody
 				- @fields.each_with_index do |field,index|

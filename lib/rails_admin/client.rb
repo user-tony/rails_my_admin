@@ -5,6 +5,16 @@ class RailsAdmin::Client < Mysql2::Client
 
 	cattr_accessor :query_str, :total_nums, :table_name
 
+	def self.select_field(type)
+		case type.gsub(/\(.*?\)/,'')
+		when "tinyint" then [['等于', '='], ['不等于', '≠']]
+		when "datetime" then [['等于', '='], ['不等于', '≠'], ['大于', '>'], ['小于','<']]
+		when "int" then [['等于', '='], ['不等于', '≠'], ['大于', '>'], ['小于','<'], ['含有', 'IN']]
+		else
+		 [['等于', '='], ['不等于', '≠'], ['包含', 'LIKE']]
+		end
+	end
+
 	def self.conn
 		@client ||= new ActiveRecord::Base.connection_config
 	end
@@ -29,26 +39,23 @@ class RailsAdmin::Client < Mysql2::Client
 	end
 
 	def self.compose(params)
-		"SELECT * FROM #{params[:id]} #{compose_key(params)}"
+		"SELECT * FROM #{params[:id]} WHERE #{params["field"].inject([]){|a, (key,value)| a << compose_key(params["calc"][key],key, value); a }.join('and')}"
 	end
 
-	def self.compose_key(params)
-		where = "WHERE #{params[:field]}"
-		case params[:calc]
+	def self.compose_key(calc,key,value)
+		case calc
 		when '=', '>', '<'
-			"#{where} #{params[:calc]} '#{params[:q]}' "
+			" `#{key}` #{calc} '#{value}' "
 		when 'IN'
-			"#{where} #{params[:calc]} (#{params[:q]}) "
+			" `#{key}` IN (#{value}) "
 		when '≠'
-			"#{where} != '#{params[:q]}'"
+			" `#{key}`  != '#{value}' "
 		when 'LIKE'
-			"#{where} LIKE '%#{params[:q]}%'"
-		when 'IS NULL'
-			"#{where} IS NULL"
+			" `#{key}` LIKE '%#{value}%' "
 		when '≥'
-			"#{where} >= '#{params[:q]}'"
+			" `#{key}`  >= '#{value}' "
 		when '≤'
-			"#{where} <= '#{params[:q]}'"
+			" `#{key}`  <= '#{value}' "
 		end
 	end
 
@@ -63,8 +70,6 @@ class RailsAdmin::Client < Mysql2::Client
 
 	def self.update(table_name, id, fields)
 		update_str = "UPDATE #{table_name} SET #{compose_update_sql(table_name, fields.to_a)}  WHERE id = #{id}"
-		p update_str
-		p "*" * 40
 		conn.origin_query update_str
 	end
 

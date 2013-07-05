@@ -21,7 +21,7 @@ class RailsAdmin::Develop::ManagesController < RailsAdmin::Develop::ApplicationC
 
 	def show
 		@query_str = "SELECT * FROM #{params[:id]}"
-		@query_str = RailsAdmin::Client.compose(params) if params[:q].present? && params[:field].present?
+		@query_str = RailsAdmin::Client.compose(params) if params[:field].present?
 		@fields = RailsAdmin::Client.desc_table params[:id]
 		@entries = RailsAdmin::Client.query(@query_str,@page, @per)
 	rescue Exception => e

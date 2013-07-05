@@ -1,7 +1,25 @@
 .span12
 	.search
-		= form_tag "", method: :post, class: 'form-search', method: :get
-			= select_tag 'field', options_for_select_column_data(params[:id], params[:field]), class: 'span2'
-			= select_tag 'calc', options_for_select([params[:calc]]), class: 'span2'
-			= text_field_tag :q, params[:q], class: 'input-medium search-query span7'
-			= button_tag '过滤', class: 'btn'
+		.row
+			= hidden_field_tag 'current_condition', params[:calc].present? && params[:calc].keys.join(",")
+			= form_tag "", method: :post, class: 'form-search', method: :get
+
+				- RailsAdmin::Client.desc_table(params[:id]).each do |column|
+					div class="span7 #{column["Field"]} check_edit" style="#{params[:calc].present? && params[:calc].has_key?(column["Field"]) ? '' : 'display:none;' }"
+						.span4
+							= label_tag do 
+								= check_box_tag "check_box[#{column['Field']}]", '', true, class: 'check_box_edit', name: '', 'data-field' => column['Field']
+								|   
+								= column["Field"]
+						.span3
+							= select_tag "calc[#{column['Field']}]", options_for_select(RailsAdmin::Client.select_field(column["Type"]), params[:calc].present? ? params[:calc][column['Field']] : nil), 'data-field' => "calc[#{column['Field']}]", class: 'span6 calc'
+						.span3
+							- column["Type"] = 'varchar' if column["Type"] == 'text'
+							- column["Default"] = params[:field][column["Field"]]  if params[:field].present?
+							= content_field(column)
+
+				.span8
+					= field_set_tag "选项" do
+						= select_tag 'select_field', options_for_select_column_data(params[:id]), class: 'span2', name: '', :prompt => "Select Filter"
+						= button_tag '应用', class: 'btn'
+						= link_to '清除', '#', class: 'btn clear'

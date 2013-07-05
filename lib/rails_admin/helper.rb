@@ -38,8 +38,8 @@ module ActionView
 				str
 			end
 
-			def options_for_select_column_data(tabel, selected=nil)
-				options_for_select RailsAdmin::Client.conn.origin_query("desc #{tabel}").each.map{|a| [ a["Field"],a["Field"], column_type: a["Type"].gsub(/\(.*?\)/,'') ]}, selected
+			def options_for_select_column_data(table, selected=nil)
+				options_for_select RailsAdmin::Client.desc_table(table).map{|a| [ a["Field"],a["Field"], column_type: a["Type"].gsub(/\(.*?\)/,'') ]}, selected
 			end
 
 			def content_field(column, value=nil)
@@ -48,15 +48,15 @@ module ActionView
 				column["Field"] = "field[#{column["Field"]}]"
 				case type
 				when 'text'
-					text_area_tag column["Field"], column["Default"], :size => "25x6", class: "#{type} span4"
+					text_area_tag column["Field"], column["Default"], :size => "25x6", 'data-field' => column["Field"], class: "#{type} span10"
 				when 'varchar'
-					text_field_tag column["Field"], column["Default"], class: "#{type} span4"
+					text_field_tag column["Field"], column["Default"], 'data-field' => column["Field"],  class: "#{type} span10"
 				when 'int'
-					number_field_tag column["Field"], column["Default"], class: "#{type} span4"
+					number_field_tag column["Field"], column["Default"], 'data-field' => column["Field"],  class: "#{type} span10"
 				when 'tinyint'
-					select_tag column["Field"], options_for_select([['Yes',1],['No',0]]), class: "#{type} span4"
+					select_tag column["Field"], options_for_select([['Yes',1],['No',0]], column["Default"]), 'data-field' => column["Field"],  class: "#{type} span10"
 				else
-					text_field_tag column["Field"], column["Default"], class: "#{type} span4"
+					text_field_tag column["Field"], column["Default"],  'data-field' => column["Field"], class: "#{type} span10"
 				end
 			end
 
