@@ -1,58 +1,58 @@
 doctype html
 html
-	head
-		title RailsAdmin
-		meta name="key_words" content="template languagea"
-		= stylesheet_link_tag "rails_admin", media: "all"
-		= javascript_include_tag 'rails_admin'
-		= csrf_meta_tag
-	body
-		#wrapper
-			#wrapper2
-				#wrapper3
-					#header
-						h1
-						#main-menu
-					- if flash[:success]
-						.alert.alert-success
-							button data-dismiss="alert" class="close" type="button" x
-							strong
-								| 成功:
-								= flash[:success]
+  head
+    title RailsAdmin
+    meta name="key_words" content="template languagea"
+    = stylesheet_link_tag "rails_admin", media: "all"
+    = javascript_include_tag 'rails_admin'
+    = csrf_meta_tag
+  body
+    #wrapper
+      #wrapper2
+        #wrapper3
+          #header
+            h1
+            #main-menu
+          - if flash[:success]
+            .alert.alert-success
+              button data-dismiss="alert" class="close" type="button" x
+              strong
+                | 成功:
+                = flash[:success]
 
-					- if flash[:errors]
-						.alert.alert-error
-							button data-dismiss="alert" class="close" type="button" x
-							strong
-								| 错误:
-								= flash[:errors]
+          - if flash[:errors]
+            .alert.alert-error
+              button data-dismiss="alert" class="close" type="button" x
+              strong
+                | 错误:
+                = flash[:errors]
 
-					- if flash[:notice]
-						.alert.alert-info
-							button data-dismiss="alert" class="close" type="button" x
-							strong
-								| 成功:
-								= flash[:notice]
-				.container-fluid
-					.row-fluid
-						.span2
-							= render 'menv'
-						.content.span10
-							- if action_name =~ /query/
-								= render 'form'
-							- elsif action_name =~ /index/
-							- else
-								= render 'navbar'
-							- if action_name =~ /show/
-								= render 'filter'
-							.span11
-								= yield
-	- if @entries.present?
-		#edit_tools
-			span
-				label 当前选择<span id="select_num">0</span>条
-			span
-				= link_to 'ⓧ', "#", class: 'btn deselect', title: '取消选择'
-				= link_to '✘', "", class: 'btn', title: '删除', disabled: true, id: "btn_delete"
-			span
-				= @entries.present? ? custom_paginate(@entries, spage: @page, stint: @per) : '0条数据'
+          - if flash[:notice]
+            .alert.alert-info
+              button data-dismiss="alert" class="close" type="button" x
+              strong
+                | 成功:
+                = flash[:notice]
+        .container-fluid
+          .row-fluid
+            .span2
+              = render 'menv'
+            .content.span10
+              - if action_name =~ /query/
+                = render 'form'
+              - elsif action_name =~ /index/
+              - else
+                = render 'navbar'
+              - if action_name =~ /show/
+                = render 'filter'
+              .span11
+                = yield
+  - if @entries.present?
+    #edit_tools
+      span
+        label 当前选择<span id="select_num">0</span>条
+      span
+        = link_to 'ⓧ', "#", class: 'btn deselect', title: '取消选择'
+        = link_to '✘', "", class: 'btn', title: '删除', disabled: true, id: "btn_delete"
+      span
+        = @entries.present? ? custom_paginate(@entries, spage: @page, stint: @per) : '0条数据'

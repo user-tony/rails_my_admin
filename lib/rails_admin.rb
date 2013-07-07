@@ -1,5 +1,5 @@
 require 'rails_admin/engine'
 
 
-module	RailsAdmin
+module  RailsAdmin
 end

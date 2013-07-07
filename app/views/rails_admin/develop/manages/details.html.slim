@@ -1,18 +1,18 @@
 
 - if @details.present?
-	.span10
-		.details#grid_search
-			table#edit_tables.table-bordered.table.table-hover
-				thead
-					tr#th-title
-						th key
-						th value
-							
-				tbody
-					- @details.first.each do |key, value|
-						tr
-							td width="200"
-								strong
-									= key
-							td
-								= value
+  .span10
+    .details#grid_search
+      table#edit_tables.table-bordered.table.table-hover
+        thead
+          tr#th-title
+            th key
+            th value
+              
+        tbody
+          - @details.first.each do |key, value|
+            tr
+              td width="200"
+                strong
+                  = key
+              td
+                = value
