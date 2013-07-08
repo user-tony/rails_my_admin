@@ -1,5 +1,5 @@
 class RailsAdmin::Develop::ApplicationController < ApplicationController
-	layout 'rails_admin/admin'
+  layout 'rails_admin/admin'
 
 
 end
