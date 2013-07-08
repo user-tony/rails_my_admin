@@ -1,9 +1,9 @@
-## Rails Admin
+## Rails Admin Content
 
 ## Getting started   
 
 ```ruby
-gem 'rails_admin'
+gem 'rails-admin-content'
 
 ```
 
@@ -14,18 +14,18 @@ add routes.rb
 
 ```ruby
 
-mount RailsAdmin::Engine => "/rails_admin"
+mount RailsAdminContent::Engine => "/rails_admin_content"
 
 or
 
 namespace :admin do
-	mount RailsAdmin::Engine => "/rails_admin"
+	mount RailsAdminContent::Engine => "/rails_admin_content"
 end
 
 ```
 
 
-Connect rails_admin configuration file
+Connect rails_admin_content configuration file
 
 ```ruby
 

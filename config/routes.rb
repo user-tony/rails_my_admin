@@ -1,4 +1,4 @@
-RailsAdmin::Engine.routes.draw do
+RailsAdminContent::Engine.routes.draw do
   match '/', to: "develop/manages#index"
   namespace :develop do
     resources :manages do

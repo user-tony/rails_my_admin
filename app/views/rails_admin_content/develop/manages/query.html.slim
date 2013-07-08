@@ -2,8 +2,8 @@
   .nav#nav
     | #{@content}
     .details#grid_search
-      form action="#{develop_manage_path(RailsAdmin::Client.table_name)}" method="delete" id="details_form" remote="true"
-        input type="hidden" value="#{RailsAdmin::Client.table_name}" name="table_name"
+      form action="#{develop_manage_path(RailsAdminContent::Client.table_name)}" method="delete" id="details_form" remote="true"
+        input type="hidden" value="#{RailsAdminContent::Client.table_name}" name="table_name"
         table#edit_tables.table-bordered.table.table-hover
           thead
             tr#th-title
@@ -20,5 +20,5 @@
                       input type="checkbox" class="edit_checkbox" value="#{content.first[1]}" name="edit_id[]"
                   - content.each do |key,value|
                     td
-                      span class="#{edited(key,value)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="#{develop_manage_path(content.values.first)}"
+                      span class="#{edited(key,value)}" data-field="#{key}" data-table="#{RailsAdminContent::Client.table_name}" data-title="#{value}" data-url="#{develop_manage_path(content.values.first)}"
                         = format(value)

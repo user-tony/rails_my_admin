@@ -4,7 +4,7 @@
       = hidden_field_tag 'current_condition', params[:calc].present? && params[:calc].keys.join(",")
       = form_tag "", method: :post, class: 'form-search', method: :get
 
-        - RailsAdmin::Client.desc_table(params[:id]).each do |column|
+        - RailsAdminContent::Client.desc_table(params[:id]).each do |column|
           div class="span7 #{column["Field"]} check_edit" style="#{params[:calc].present? && params[:calc].has_key?(column["Field"]) ? '' : 'display:none;' }"
             .span4
               = label_tag do 
@@ -12,7 +12,7 @@
                 |   
                 = column["Field"]
             .span3
-              = select_tag "calc[#{column['Field']}]", options_for_select(RailsAdmin::Client.select_field(column["Type"]), params[:calc].present? ? params[:calc][column['Field']] : nil), 'data-field' => "calc[#{column['Field']}]", class: 'span6 calc'
+              = select_tag "calc[#{column['Field']}]", options_for_select(RailsAdminContent::Client.select_field(column["Type"]), params[:calc].present? ? params[:calc][column['Field']] : nil), 'data-field' => "calc[#{column['Field']}]", class: 'span6 calc'
             .span3
               - column["Type"] = 'varchar' if column["Type"] == 'text'
               - column["Default"] = params[:field][column["Field"]]  if params[:field].present?

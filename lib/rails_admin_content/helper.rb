@@ -2,7 +2,7 @@ module ActionView
   module Helpers
     module DateHelper
       def custom_paginate(scope, options = {})
-        paginate = RailsAdmin::Paginate.new(scope, options.update(per_page: options[:stint]))
+        paginate = RailsAdminContent::Paginate.new(scope, options.update(per_page: options[:stint]))
         paginate.to_s
       end
 
@@ -39,7 +39,7 @@ module ActionView
       end
 
       def options_for_select_column_data(table, selected=nil)
-        options_for_select RailsAdmin::Client.desc_table(table).map{|a| [ a["Field"],a["Field"], column_type: a["Type"].gsub(/\(.*?\)/,'') ]}, selected
+        options_for_select RailsAdminContent::Client.desc_table(table).map{|a| [ a["Field"],a["Field"], column_type: a["Type"].gsub(/\(.*?\)/,'') ]}, selected
       end
 
       def content_field(column, value=nil)

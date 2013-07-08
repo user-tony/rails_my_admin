@@ -2,7 +2,7 @@
   .well.nav-collapse.sidebar-nav
     ul.nav.nav-tabs.nav-stacked.main-menu
       li.nav-header.hidden-tablet style="font-size:12px"
-        | Database  #{RailsAdmin::Client.conn.query_options[:database]}
-        - RailsAdmin::Client.get_tables.each do |table|
+        | Database  #{RailsAdminContent::Client.conn.query_options[:database]}
+        - RailsAdminContent::Client.get_tables.each do |table|
           li class="#{'active' if params[:id] == table.values.first}"
             = link_to table.values.first, develop_manage_path(table.values.first), title: "[#{table.keys.first}] #{table.values.first}"

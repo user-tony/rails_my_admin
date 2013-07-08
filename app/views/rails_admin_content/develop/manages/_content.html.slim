@@ -17,5 +17,5 @@
                     input type="checkbox" class="edit_checkbox" value="#{content.first[1]}" name="edit_id[]"
                 - content.each do |key,value|
                   td
-                    span class="#{edited(key,value)}" data-field="#{key}" data-table="#{RailsAdmin::Client.table_name}" data-title="#{value}" data-url="#{develop_manage_path(content.values.first)}"
+                    span class="#{edited(key,value)}" data-field="#{key}" data-table="#{RailsAdminContent::Client.table_name}" data-title="#{value}" data-url="#{develop_manage_path(content.values.first)}"
                       = format(value)

@@ -1,4 +1,4 @@
-module RailsAdmin
+module RailsAdminContent
   module Mysql
     module Adapters
       class Client

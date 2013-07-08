@@ -1,4 +1,4 @@
-class RailsAdmin::Client < Mysql2::Client
+class RailsAdminContent::Client < Mysql2::Client
 
   Syntax = /limit\s+\d+,\d+|limit\s+\d+/
   Syntax_table = /from\s+(\w+)/

@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-RailsAdmin::Application.load_tasks
+RailsAdminContent::Application.load_tasks

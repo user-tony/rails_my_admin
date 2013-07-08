@@ -7,22 +7,22 @@
           dd Home
 
       li
-        = link_to new_develop_manage_path(id: RailsAdmin::Client.table_name), class: 'btn-icon', title: 'add' do
+        = link_to new_develop_manage_path(id: RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'add' do
           dt = image_tag("add.png")
           dd Add
 
       li 
-        = link_to develop_manage_path(RailsAdmin::Client.table_name), class: 'btn-icon', title: 'Content' do
+        = link_to develop_manage_path(RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'Content' do
           dt = image_tag("content.png")
           dd Content
 
       li
-        = link_to edit_column_develop_manage_path(RailsAdmin::Client.table_name), class: 'btn-icon', title: 'Structure' do
+        = link_to edit_column_develop_manage_path(RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'Structure' do
           dt = image_tag("setting.png")
           dd Structure
 
       li
-        = link_to details_develop_manage_path(RailsAdmin::Client.table_name), class: 'btn-icon', title: 'Table info' do
+        = link_to details_develop_manage_path(RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'Table info' do
           dt = image_tag("details.png")
           dd Table info
 

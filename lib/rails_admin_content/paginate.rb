@@ -1,4 +1,4 @@
-module RailsAdmin
+module RailsAdminContent
   class Paginate
     
     def initialize(scope, options = {})
@@ -7,8 +7,8 @@ module RailsAdmin
 
     def to_s
       return "" unless @scope
-      current_page, total_pages = @options[:spage].to_i, RailsAdmin::Client.total_nums / @options[:stint] + 1
-      # return "共#{RailsAdmin::Client.total_nums}条数据" if total_pages <= 1
+      current_page, total_pages = @options[:spage].to_i, RailsAdminContent::Client.total_nums / @options[:stint] + 1
+      # return "共#{RailsAdminContent::Client.total_nums}条数据" if total_pages <= 1
       param_name = @options["param_name"] || "page"
       url = @options["url"] || ""
       helpers.content_tag :div, :class => "pagination" do
@@ -31,7 +31,7 @@ module RailsAdmin
             (1..total_pages).each{ |i| result << page_link(i, current_page) }
           end
           result += helpers.content_tag(:li, class: "next"){helpers.link_to("下一页 ›", "#{url}?#{param_name}=#{current_page+1}")} if current_page < total_pages
-          result += helpers.content_tag(:li, class: 'disabled total_pages'){helpers.link_to "共#{RailsAdmin::Client.total_nums}条数据", "#"}
+          result += helpers.content_tag(:li, class: 'disabled total_pages'){helpers.link_to "共#{RailsAdminContent::Client.total_nums}条数据", "#"}
           result.html_safe
         end
       end
