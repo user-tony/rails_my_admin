@@ -29,10 +29,10 @@ Connect rails_admin_content configuration file
 
 ```ruby
 
-http://localhost:3000/rails_admn/
+http://localhost:3000/rails_admn_content/
 
 or
 
-http://localhost:3000/admin/rails_admn/
+http://localhost:3000/admin/rails_admn_content/
 
 ```
