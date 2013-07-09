@@ -5,4 +5,4 @@
         | Database  #{RailsAdminContent::Client.conn.query_options[:database]}
         - RailsAdminContent::Client.get_tables.each do |table|
           li class="#{'active' if params[:id] == table.values.first}"
-            = link_to table.values.first, develop_manage_path(table.values.first), title: "[#{table.keys.first}] #{table.values.first}"
+            = link_to table.values.first.to_s.truncate(20), develop_manage_path(table.values.first), title: "[#{table.keys.first}] #{table.values.first}"
