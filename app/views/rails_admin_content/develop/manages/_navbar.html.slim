@@ -11,17 +11,17 @@
           dt = image_tag("add.png")
           dd Add
 
-      li 
+      li class="#{ 'active' if action_name =~ /show/ && controller_name =~ /manages/ }"
         = link_to develop_manage_path(RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'Content' do
           dt = image_tag("content.png")
           dd Content
-
-      li
+        
+      li class="#{ 'active' if action_name =~ /edit_column/ && controller_name =~ /manages/ }"
         = link_to edit_column_develop_manage_path(RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'Structure' do
           dt = image_tag("setting.png")
           dd Structure
 
-      li
+      li class="#{ 'active' if action_name =~ /details/ && controller_name =~ /manages/ }"
         = link_to details_develop_manage_path(RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'Table info' do
           dt = image_tag("details.png")
           dd Table info
