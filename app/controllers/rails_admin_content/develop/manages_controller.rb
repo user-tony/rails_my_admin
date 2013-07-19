@@ -6,7 +6,6 @@ class RailsAdminContent::Develop::ManagesController < RailsAdminContent::Develop
     @version = RailsAdminContent::Client.conn.origin_query("SELECT Version() as version").each
   end
 
-
   def query
     @entries = RailsAdminContent::Client.query(RailsAdminContent::Client.query_str,@page, @per).each  if RailsAdminContent::Client.query_str
   rescue Exception => e
