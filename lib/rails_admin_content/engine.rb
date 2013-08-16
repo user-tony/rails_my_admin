@@ -6,7 +6,7 @@ require 'rails_admin_content/client'
 require 'rails_admin_content/helper'
 
 module RailsAdminContent
-  class Engine < ::Rails::Engine
-    isolate_namespace RailsAdminContent
-  end
+	class Engine < ::Rails::Engine
+		isolate_namespace RailsAdminContent
+	end
 end

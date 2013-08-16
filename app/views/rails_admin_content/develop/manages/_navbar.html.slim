@@ -1,34 +1,27 @@
 .span10
-  .navbar
-    ul
-      li
-        = link_to develop_manages_path, class: 'btn-icon', title: 'Home' do
-          dt = image_tag("home.png")
-          dd Home
+	.navbar
+		ul
+			li
+				span.section
+					= link_to 'Home', develop_manages_path, class: 'btn-icon', title: 'Home'
+			li
+				span.section
+					= link_to 'Add', new_develop_manage_path(id: RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'add'
 
-      li
-        = link_to new_develop_manage_path(id: RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'add' do
-          dt = image_tag("add.png")
-          dd Add
-
-      li class="#{ 'active' if action_name =~ /show/ && controller_name =~ /manages/ }"
-        = link_to develop_manage_path(RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'Content' do
-          dt = image_tag("content.png")
-          dd Content
+			li class="#{ 'active' if action_name =~ /show/ && controller_name =~ /manages/ }"
+				span.section
+					= link_to 'Content', develop_manage_path(RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'Content'
         
-      li class="#{ 'active' if action_name =~ /edit_column/ && controller_name =~ /manages/ }"
-        = link_to edit_column_develop_manage_path(RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'Structure' do
-          dt = image_tag("setting.png")
-          dd Structure
+			li class="#{ 'active' if action_name =~ /edit_column/ && controller_name =~ /manages/ }"
+				span.section
+					= link_to  'Structure', edit_column_develop_manage_path(RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'Structure'
 
-      li class="#{ 'active' if action_name =~ /details/ && controller_name =~ /manages/ }"
-        = link_to details_develop_manage_path(RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'Table info' do
-          dt = image_tag("details.png")
-          dd Table info
+			li class="#{ 'active' if action_name =~ /details/ && controller_name =~ /manages/ }"
+				span.section
+					= link_to 'Table', details_develop_manage_path(RailsAdminContent::Client.table_name), class: 'btn-icon', title: 'Table info'
 
-      li
-        = link_to query_develop_manages_path, class: 'btn-icon', title: 'Query' do
-          dt = image_tag("search.png")
-          dd Query
+			li
+				span.section
+					= link_to 'Query', query_develop_manages_path, class: 'btn-icon', title: 'Query'
 
-  div style="clear:both"
+	div style="clear:both"

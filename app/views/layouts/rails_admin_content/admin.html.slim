@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title RailsAdminContent
+    title RailsAdmin
     meta name="key_words" content="template languagea"
     = stylesheet_link_tag "rails_admin_content", media: "all"
     = javascript_include_tag 'rails_admin_content'
@@ -11,8 +11,10 @@ html
       #wrapper2
         #wrapper3
           #header
-            h1
+            h1 RailsAdmin
             #main-menu
+						- unless action_name =~ /query/
+							= render 'navbar'
           - if flash[:success]
             .alert.alert-success
               button data-dismiss="alert" class="close" type="button" x
@@ -38,15 +40,13 @@ html
             .span2
               = render 'menv'
             .content.span10
-              - if action_name =~ /query/
-                = render 'form'
-              - elsif action_name =~ /index/
-              - else
-                = render 'navbar'
-              - if action_name =~ /show/
-                = render 'filter'
-              .span11
-                = yield
+							
+							- if action_name =~ /show/
+								= render 'filter'
+							- elsif action_name =~ /query/
+								= render 'form'
+							.span11 style="width:100%;margin: 0px;"
+							= yield
   - if @entries.present?
     #edit_tools
       span

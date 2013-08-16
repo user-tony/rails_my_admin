@@ -19,7 +19,7 @@
               = content_field(column)
 
         .span8
-          = field_set_tag "选项" do
+          = field_set_tag "Selection" do
             = select_tag 'select_field', options_for_select_column_data(params[:id]), class: 'span2', name: '', :prompt => "Select Filter"
-            = button_tag '应用', class: 'btn'
-            = link_to '清除', '#', class: 'btn clear'
+            = button_tag 'Apply', class: 'btn'
+            = link_to 'Clear', '#', class: 'btn clear'

@@ -359,9 +359,8 @@ span.author-name{
 }
 
 #main-menu {
-    bottom: 3px;
-    left: 26px;
-    margin-right: -500px;
+    bottom: 8px;
+    left: 311px;
     position: absolute;
 }
 
@@ -388,9 +387,8 @@ span.author-name{
     white-space: nowrap;
 }
 #main-menu li a {
-    background: none repeat scroll 0 0 #507AAA;
+    /*  background: none repeat scroll 0 0 #507AAA; */
     font-weight: bold;
-    padding: 4px 10px;
 }
 #main-menu li a:hover {
     background: none repeat scroll 0 0 #759FCF;
@@ -486,6 +484,16 @@ span.author-name{
   overflow: hidden;
 }
 
-.navbar li{
-  text-align: center;
+.navbar li.active .section{
+	background-color: #fff;
 }
+.navbar li .section{
+	margin: 2px;
+}
+.navbar li .section a{
+	padding: 10px;
+	background-color: #759fcf;
+} 
+
+
+
