@@ -14,13 +14,8 @@ add routes.rb
 
 ```ruby
 
-mount RailsAdminContent::Engine => "/rails_admin_content"
+mount RailsAdminContent::Engine => "/rails_admin"
 
-or
-
-namespace :admin do
-	mount RailsAdminContent::Engine => "/rails_admin_content"
-end
 
 ```
 
@@ -29,10 +24,6 @@ Connect rails_admin_content configuration file
 
 ```ruby
 
-http://localhost:3000/rails_admn_content/
-
-or
-
-http://localhost:3000/admin/rails_admn_content/
+http://localhost:3000/rails_admn/
 
 ```

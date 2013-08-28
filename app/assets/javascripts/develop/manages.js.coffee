@@ -25,11 +25,11 @@ $(document).ready ->
 		editor = CodeMirror.fromTextArea(document.getElementById("search-textarea"), {
 				mode: "text/x-sql",
 				tabMode: "indent",
+				smartIndent: true,
 				lineNumbers: true,
 				matchBrackets: true,
 				indentUnit: 2
 		  });
-		editor.setOption("theme", 'midnight');
 
 	$('span.edit_datepicker').on 'click', 'textarea', -> $(this).dynDateTime()
 	$('.formitem .datetime').on 'click', -> $(this).dynDateTime()
