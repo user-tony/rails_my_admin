@@ -1,0 +1,31 @@
+css:
+	body{
+		font-family: "Microsoft YaHei",'微软雅黑',msyh;
+	}
+.HeaderContainer
+	a.logo  title="Home"
+	ul.topbar
+		li
+			= link_to 'Home', develop_manages_path, class: "#{'current' if action_name =~ /index/}", title: 'Home'
+		- unless action_name =~ /index|query/
+			li
+				= link_to 'Content', develop_manage_path(RailsAdminContent::Client.table_name), class: "#{ 'current' if action_name =~ /show/ && controller_name =~ /manages/ }", title: 'Content'
+			li
+				= link_to  'Structure', edit_column_develop_manage_path(RailsAdminContent::Client.table_name), class: "#{ 'current' if action_name =~ /edit_column/ && controller_name =~ /manages/ }", title: 'Structure'
+
+			li
+				= link_to 'Table', details_develop_manage_path(RailsAdminContent::Client.table_name), class: "#{ 'current' if action_name =~ /details/ && controller_name =~ /manages/ }", title: 'Table info'
+		li
+			= link_to 'Query', query_develop_manages_path, class: 'btn-icon', title: 'Query'
+			a Help
+	.userinfo
+		ul
+			li.site
+				a.set title="设置"
+				.sitebox
+					.list
+						- (1...20).each do |i|
+							=link_to "bgcolor#{i}", '#', class: "color bgcolor#{i}"
+					.hr
+					.sitesignout
+						= link_to 'Sign out'

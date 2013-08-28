@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/core/!svn/ver/11128/server/trunk/app/assets/stylesheets/develop/document/application
+END
+common.css.sass
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/core/!svn/ver/11128/server/trunk/app/assets/stylesheets/develop/document/application/common.css.sass
+END
+login.css.sass
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/core/!svn/ver/11116/server/trunk/app/assets/stylesheets/develop/document/application/login.css.sass
+END
+forbidden.css.sass
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/core/!svn/ver/11116/server/trunk/app/assets/stylesheets/develop/document/application/forbidden.css.sass
+END

@@ -1,17 +1,15 @@
-
-.span8
-  = form_tag(develop_manage_path(params[:id]), method: :put)
-    = field_set_tag "Table[#{params[:table_name]}]" do
-      = hidden_field_tag 'table_name', params[:table_name]
-      - columns = RailsAdminContent::Client.conn.origin_query("DESC #{params[:table_name]}").each
-      - RailsAdminContent::Client.conn.origin_query("SELECT * FROM #{params[:table_name]} WHERE id = #{params[:id]}").each[0].map do |key,value|
-        - if key == "id"
-          = hidden_field_tag :id, value
-        - else
+h1 
+  = params[:table_name]
+  = form_tag(develop_manage_path(params[:id]), method: :put, class: 'formbox formitem')
+    = hidden_field_tag 'table_name', params[:table_name]
+    - columns = RailsAdminContent::Client.conn.origin_query("DESC #{params[:table_name]}").each
+    - RailsAdminContent::Client.conn.origin_query("SELECT * FROM #{params[:table_name]} WHERE id = #{params[:id]}").each[0].map do |key,value|
+      - if key == "id"
+        = hidden_field_tag :id, value
+      - else
+        fieldset
           = label_tag "field[#{key}]", key
           = content_field(columns.select{|c| c["Field"] == key }.first ,value)
-      .controllers
-        .span2
-          = submit_tag 'Save', class: 'btn btn-primary'
-        .span2
-          = link_to 'Back', :back, class: 'btn'
+    fieldset.ff-item-top
+      = submit_tag 'Save'
+      = link_to 'Back', :back

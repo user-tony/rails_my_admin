@@ -32,6 +32,7 @@ class RailsAdminContent::Develop::ManagesController < RailsAdminContent::Develop
 
 	def edit_column
 		@fields = RailsAdminContent::Client.desc_table params[:id]
+		@sql = RailsAdminContent::Client.show_create_sql params[:id]
 	end
 
 	def details

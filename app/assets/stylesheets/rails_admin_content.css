@@ -11,9 +11,7 @@
  *= require_self
  *= require develop/manages
  *= require dyndatetime/calendar-system
- *= require bootstrap/bootstrap-app
- *= require solarized
  *= require codemirror
- *= require site
+ *= require midnight
+ *= require ./develop/application
  */
-

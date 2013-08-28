@@ -1,58 +1,49 @@
 doctype html
 html
   head
-    title RailsAdmin
-    meta name="key_words" content="template languagea"
+    meta http-equiv="Content-Type" content="text/html; charset=utf-8"
+    title Rails Admin
     = stylesheet_link_tag "rails_admin_content", media: "all"
     = javascript_include_tag 'rails_admin_content'
     = csrf_meta_tag
-  body
-    #wrapper
-      #wrapper2
-        #wrapper3
-          #header
-            h1 RailsAdmin
-            #main-menu
-						- unless action_name =~ /query/
-							= render 'navbar'
-          - if flash[:success]
-            .alert.alert-success
-              button data-dismiss="alert" class="close" type="button" x
-              strong
-                | 成功:
-                = flash[:success]
+  body.bgcolor16
+    #body.railsadmin
+      = render 'header'
+      .Container
+        .sidebar
+          .searchbox
+            form
+              .search
+                input.text type="text" value="" id="seaerch-T" placeholder="搜索文档"
+                input.submit type="submit" title="搜索文档" value="" onclick="return false"
+          .section
+            / h3 账号
+            ul.link_list
+              - RailsAdminContent::Client.get_tables.each do |table|
+                li data-field="#{table.values.first}"
+                  = link_to table.values.first.to_s.truncate(30), develop_manage_path(table.values.first), title: "[#{table.keys.first}] #{table.values.first}", class: "#{'current' if params[:id] == table.values.first}"
+        .main
+          .section
+            - if action_name =~ /show/
+              h1 
+                = params[:id]
+              .formbox
+                = render 'filter'
+            - if action_name =~ /query/
+              h1
+              .formbox
+                = render 'form'
+            = yield
 
-          - if flash[:errors]
-            .alert.alert-error
-              button data-dismiss="alert" class="close" type="button" x
-              strong
-                | 错误:
-                = flash[:errors]
-
-          - if flash[:notice]
-            .alert.alert-info
-              button data-dismiss="alert" class="close" type="button" x
-              strong
-                | 成功:
-                = flash[:notice]
-        .container-fluid
-          .row-fluid
-            .span2
-              = render 'menv'
-            .content.span10
-							
-							- if action_name =~ /show/
-								= render 'filter'
-							- elsif action_name =~ /query/
-								= render 'form'
-							.span11 style="width:100%;margin: 0px;"
-							= yield
-  - if @entries.present?
-    #edit_tools
-      span
-        label 当前选择<span id="select_num">0</span>条
-      span
-        = link_to 'ⓧ', "#", class: 'btn deselect', title: '取消选择'
-        = link_to '✘', "", class: 'btn', title: '删除', disabled: true, id: "btn_delete"
-      span
-        = @entries.present? ? custom_paginate(@entries, spage: @page, stint: @per) : '0条数据'
+        .clear
+      .ra_tools
+        .fadeout
+        .tools_box
+          .manipulate
+            - if action_name =~ /show/
+              = link_to '+', new_develop_manage_path(id: RailsAdminContent::Client.table_name),class: 'tool_01'
+              = link_to '-', "", class: 'tool_02', title: '删除', id: 'btn_del'
+            / a.tool_02 href="#" - 
+            / a.tool_03 href="#" v
+          = custom_paginate(@entries, spage: @page, stint: @per) if @entries.present?
+          a.layout_scrolltop id="layout_scrolltop" style="visibility: visible;" &nbsp;

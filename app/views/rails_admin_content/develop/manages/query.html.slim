@@ -1,5 +1,5 @@
 - if @entries.present? && @entries.first
-  .nav#nav
+  .tablescroll
     | #{@content}
     .details#grid_search
       form action="#{develop_manage_path(RailsAdminContent::Client.table_name)}" method="delete" id="details_form" remote="true"
@@ -7,7 +7,8 @@
         table#edit_tables.table-bordered.table.table-hover
           thead
             tr#th-title
-              th Index
+              th
+                input type="checkbox" class="checkbox toggle" id="toggle_check"
               - @entries.first.keys.each do |entry|
                 th
                   = entry

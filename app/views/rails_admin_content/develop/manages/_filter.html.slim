@@ -1,25 +1,23 @@
 .span12
-  .search
-    .row
-      = hidden_field_tag 'current_condition', params[:calc].present? && params[:calc].keys.join(",")
-      = form_tag "", method: :post, class: 'form-search', method: :get
+  = hidden_field_tag 'current_condition', params[:calc].present? && params[:calc].keys.join(",")
+  = form_tag "", method: :post, class: 'form-search', method: :get
 
-        - RailsAdminContent::Client.desc_table(params[:id]).each do |column|
-          div class="span7 #{column["Field"]} check_edit" style="#{params[:calc].present? && params[:calc].has_key?(column["Field"]) ? '' : 'display:none;' }"
-            .span4
-              = label_tag do 
-                = check_box_tag "check_box[#{column['Field']}]", '', true, class: 'check_box_edit', name: '', 'data-field' => column['Field']
-                |   
-                = column["Field"]
-            .span3
-              = select_tag "calc[#{column['Field']}]", options_for_select(RailsAdminContent::Client.select_field(column["Type"]), params[:calc].present? ? params[:calc][column['Field']] : nil), 'data-field' => "calc[#{column['Field']}]", class: 'span6 calc'
-            .span3
-              - column["Type"] = 'varchar' if column["Type"] == 'text'
-              - column["Default"] = params[:field][column["Field"]]  if params[:field].present?
-              = content_field(column)
+    - RailsAdminContent::Client.desc_table(params[:id]).each do |column|
+      div class="span7 #{column["Field"]} check_edit" style="#{params[:calc].present? && params[:calc].has_key?(column["Field"]) ? '' : 'display:none;' }"
+        .span4
+          = label_tag do 
+            = check_box_tag "check_box[#{column['Field']}]", '', true, class: 'check_box_edit', name: '', 'data-field' => column['Field']
+            |   
+            = column["Field"]
+        .span3
+          = select_tag "calc[#{column['Field']}]", options_for_select(RailsAdminContent::Client.select_field(column["Type"]), params[:calc].present? ? params[:calc][column['Field']] : nil), 'data-field' => "calc[#{column['Field']}]", class: 'span6 calc'
+        .span3
+          - column["Type"] = 'varchar' if column["Type"] == 'text'
+          - column["Default"] = params[:field][column["Field"]]  if params[:field].present?
+          = content_field(column)
 
-        .span8
-          = field_set_tag "Selection" do
-            = select_tag 'select_field', options_for_select_column_data(params[:id]), class: 'span2', name: '', :prompt => "Select Filter"
-            = button_tag 'Apply', class: 'btn'
-            = link_to 'Clear', '#', class: 'btn clear'
+    .span8
+      = field_set_tag "Selection" do
+        = select_tag 'select_field', options_for_select_column_data(params[:id]), class: 'span2', name: '', :prompt => "Select Filter"
+        = button_tag 'Apply', class: 'btn'
+        = link_to 'Clear', '#', class: 'btn clear'

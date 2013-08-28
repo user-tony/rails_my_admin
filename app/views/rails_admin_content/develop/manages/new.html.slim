@@ -1,10 +1,10 @@
-.span8
-  = form_tag develop_manages_path
-    = field_set_tag "Table[#{params[:id]}]" do
-      = hidden_field_tag 'table_name', params[:id]
-      - RailsAdminContent::Client.conn.origin_query("DESC #{params[:id]}").each.map do |column|
-        - next if column["Field"] == "id"
-        = label_tag "field[#{column["Field"]}]", column["Field"]
-        = content_field column
-      .controllers
-        = submit_tag 'Save', class: 'btn btn-primary'
+h1
+	= params[:id]
+= form_tag develop_manages_path, class: "formbox formitem"
+  = hidden_field_tag 'table_name', params[:id]
+  - RailsAdminContent::Client.conn.origin_query("DESC #{params[:id]}").each.map do |column|
+    - next if column["Field"] == "id"
+    = label_tag "field[#{column["Field"]}]", column["Field"]
+    = content_field column
+  .controllers
+    = submit_tag 'Save', class: 'btn btn-primary'

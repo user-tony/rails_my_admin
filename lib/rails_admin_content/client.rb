@@ -89,5 +89,9 @@ class RailsAdminContent::Client < Mysql2::Client
 		conn.origin_query("DESC #{table_name}").each
 	end
 
+	def self.show_create_sql(table_name)
+		conn.origin_query("SHOW CREATE TABLE #{table_name}").each
+	end
+
 
 end

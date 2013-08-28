@@ -3,16 +3,22 @@ option_select = (value) ->
 
 remove_tr = (id) ->
 	$('.tr_'+id).fadeToggle("slow", "linear");
-	$('#edit_tables .edit_checkbox:checked').attr('checked', false)
+	$('.tablescroll .edit_checkbox:checked').prop('checked', false)
 	checked_status()
 
 
 checked_status = -> 
-	$('#btn_delete').attr('disabled', !$('#edit_tables .edit_checkbox:checked').length > 0)
-	$('#select_num').html $('#edit_tables .edit_checkbox:checked').length || 0
+	if $('.tablescroll .edit_checkbox:checked').length > 0 then $('#btn_del').show() else $('#btn_del').hide()
+
 	
 hidden_input_select_with_name = ->
 	$('.check_edit[style!=""] .span3 input, .check_edit[style!=""] .span3 select').attr('name', '')
+
+search_input_change = ->
+	for li in $('.link_list li')
+		do (li) ->
+			return $(li).show() if $.trim($('#seaerch-T').val()).length == 0
+			if RegExp($('#seaerch-T').val().toLocaleLowerCase()).test($(li).attr('data-field')) then $(li).show() else $(li).hide()
 
 $(document).ready ->
 	if document.getElementById("search-textarea")
@@ -23,10 +29,10 @@ $(document).ready ->
 				matchBrackets: true,
 				indentUnit: 2
 		  });
-		editor.setOption("theme", 'twillght');
+		editor.setOption("theme", 'midnight');
 
 	$('span.edit_datepicker').on 'click', 'textarea', -> $(this).dynDateTime()
-	$('.row-fluid .datetime').on 'click', -> $(this).dynDateTime()
+	$('.formitem .datetime').on 'click', -> $(this).dynDateTime()
 
 	height = Math.floor($('#main .content').height()/40)+18
 	if ($('.main-menu-span .well ul li').size() > height)
@@ -37,22 +43,20 @@ $(document).ready ->
 			false
 		false
 
-		
-
-	$('#edit_tables').on 'click', '.edit_checkbox', ->
-		$(this).parents('tr').toggleClass('active')
+	$('.tablescroll').on 'click', '.edit_checkbox', ->
+		$(this).parents('tr').toggleClass('selection')
 		checked_status()
 
-	$('#edit_tools').on 'click', '.deselect', ->
-		$('#edit_tables .edit_checkbox:checked').attr('checked', false)
+	$('.tablescroll').on 'click', '.deselect', ->
+		$('.tablescroll .edit_checkbox:checked').attr('checked', false)
 		checked_status()
-		for input_check in $('#edit_tables .edit_checkbox')
-			do (input_check) -> $(input_check).parents('tr').removeClass("active")
+		for input_check in $('.tablescroll .edit_checkbox')
+			do (input_check) -> $(input_check).parents('tr').removeClass("selection")
 		false
 
-	$('#btn_delete').on 'click', ->
+	$('.tools_box .tool_02').on 'click', ->
 		return false if $(this).attr('disabled')
-		if(window.confirm("确定要删除么?"))
+		if($('.tablescroll .edit_checkbox:checked').length > 0 && window.confirm("确定要删除么?"))
 			$.ajax
 				url: $('#details_form').attr("action"), data: $('#details_form').serialize(), type: 'delete', dataType: 'json',
 				success: (data) -> remove_tr id for id in data
@@ -77,9 +81,33 @@ $(document).ready ->
 		hidden_input_select_with_name()
 
 
-	for input_check in $('#edit_tables .edit_checkbox:checked')
-		do (input_check) -> $(input_check).parents('tr').addClass("active")
+	$('#seaerch-T').on
+		change: ->
+			search_input_change()
+		keyup: ->
+			search_input_change()
 
+	search_input_change()
+
+
+
+	for input_check in $('.tablescroll .edit_checkbox:checked')
+		do (input_check) -> $(input_check).parents('tr').addClass("selection")
+
+
+
+	$('#toggle_check').on 'click', ->
+		$('input.edit_checkbox').prop('checked', $(this).is(":checked"))
+		if ($(this).is(":checked"))
+			$('input.edit_checkbox').parents('tr').addClass('selection')
+		else
+			$('input.edit_checkbox').parents('tr').removeClass('selection')
+		checked_status()
+		
+	# back top
+	$('#layout_scrolltop').on 'click', -> $("html, body").animate({ scrollTop: 0 }, 120);
+
+	# $(window).on 'scroll', -> $('#layout_scrolltop').css('visibility', $(window).scrollTop() > 500 ? 'visible' : 'hidden');
 
 	# 检查选择状态
 	checked_status()
@@ -94,3 +122,13 @@ $(document).ready ->
 	$('.check_edit[style=""] .check_box_edit').each -> $('.span3', $(this).parents('div.check_edit')).hide() if !$(this).is(":checked")
 		
 	false
+
+$ ->
+	$(document).on 'mousedown', '.color', ->
+		$('body').removeClass('bgcolor1 bgcolor2 bgcolor3 bgcolor4 bgcolor5 bgcolor6 bgcolor7 bgcolor8 bgcolor9 bgcolor10 bgcolor11 bgcolor12 bgcolor13 bgcolor14 bgcolor15 bgcolor16 bgcolor17 bgcolor18 bgcolor19 bgcolor20').addClass($(this).text().toLowerCase())
+		$.cookie 'document_color', $(this).text().toLowerCase(),
+			expires: 30
+			path: '/'
+	if color = $.cookie('document_color')
+		$('body').removeClass('bgcolor1 bgcolor2 bgcolor3 bgcolor4 bgcolor5 bgcolor6 bgcolor7 bgcolor8 bgcolor9 bgcolor10 bgcolor11 bgcolor12 bgcolor13 bgcolor14 bgcolor15 bgcolor16 bgcolor17 bgcolor18 bgcolor19 bgcolor20').addClass(color)
+

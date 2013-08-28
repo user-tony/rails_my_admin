@@ -17,6 +17,7 @@
 //= require develop/manages
 //= require jquery/jquery.jeditable
 //= require jquery/editable
+//= require jquery/jquery.cookie
+//= require jquery/jquery.color
 //= require jquery/dyndatetime/dynDateTime
 //= require jquery/dyndatetime/calendar_zh
-//= require bootstrap/bootstrap-alert
