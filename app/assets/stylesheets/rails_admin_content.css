@@ -13,5 +13,6 @@
  *= require dyndatetime/calendar-system
  *= require codemirror
  *= require midnight
- *= require ./develop/application
+ *= require common
+ *= require forbidden
  */
