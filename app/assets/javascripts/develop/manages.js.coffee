@@ -20,16 +20,21 @@ search_input_change = ->
 			return $(li).show() if $.trim($('#seaerch-T').val()).length == 0
 			if RegExp($('#seaerch-T').val().toLocaleLowerCase()).test($(li).attr('data-field')) then $(li).show() else $(li).hide()
 
+initialize_textarea_sql = (id) ->
+	if var_id = document.getElementById(id)
+		editor = CodeMirror.fromTextArea var_id,
+			mode: "text/x-sql",
+			tabMode: "indent",
+			smartIndent: true,
+			lineNumbers: true,
+			matchBrackets: true,
+			indentUnit: 2
+			
+
 $(document).ready ->
-	if document.getElementById("search-textarea")
-		editor = CodeMirror.fromTextArea(document.getElementById("search-textarea"), {
-				mode: "text/x-sql",
-				tabMode: "indent",
-				smartIndent: true,
-				lineNumbers: true,
-				matchBrackets: true,
-				indentUnit: 2
-		  });
+	initialize_textarea_sql 'search-textarea'
+	initialize_textarea_sql 'show-sql-textarea'
+
 
 	$('span.edit_datepicker').on 'click', 'textarea', -> $(this).dynDateTime()
 	$('.formitem .datetime').on 'click', -> $(this).dynDateTime()
