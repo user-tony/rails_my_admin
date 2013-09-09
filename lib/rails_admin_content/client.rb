@@ -93,5 +93,15 @@ class RailsAdminContent::Client < Mysql2::Client
     conn.origin_query("SHOW CREATE TABLE #{table_name}").each
   end
 
+  def self.modify_table_column_default_value(table_name, column, value, field_type)
+    default_value = case field_type.gsub(/\(.*?\)/,'')
+    when "tinyint" then value.present?
+    when "datetime" then value.to_time.to_s(:db)
+    when "int" then value.to_i
+    else
+      value.to_s
+    end
+    conn.origin_query("ALTER TABLE #{table_name} ALTER COLUMN #{column} SET DEFAULT '#{default_value}'")
+  end
 
 end

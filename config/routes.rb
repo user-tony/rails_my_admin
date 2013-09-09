@@ -7,6 +7,7 @@ RailsAdminContent::Engine.routes.draw do
       put :update_field, on: :member
       get :edit_column, on: :member
       get :details, on: :member
+      put :modify_default_value, on: :collection
     end
   end
 end

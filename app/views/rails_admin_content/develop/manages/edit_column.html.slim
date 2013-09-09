@@ -25,7 +25,8 @@ hr
             td
               = field["key"]
             td
-              = field["Default"]
+              span class="editable #{'edit_datepicker' if field["Type"] == 'datetime'}" data-field="#{field["Field"]}" data-table="#{params[:id]}" data-title="#{field["Default"]}" data-url="#{modify_default_value_develop_manages_path(field_type: field["Type"])}"
+                = field["Default"]
             td
               = field["extra"]
 

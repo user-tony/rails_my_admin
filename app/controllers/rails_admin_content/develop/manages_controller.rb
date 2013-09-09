@@ -68,6 +68,11 @@ class RailsAdminContent::Develop::ManagesController < RailsAdminContent::Develop
     render json: params[:edit_id]
   end
 
+  def modify_default_value
+    RailsAdminContent::Client.modify_table_column_default_value(params[:table], params[:field], params[:value], params[:field_type])
+    render json: params[:edit_id]
+  end
+
   private
 
   def find_params
