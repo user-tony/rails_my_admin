@@ -1,5 +1,5 @@
 = form_tag filter_develop_manages_path, method: :post
   #search_area
-    textarea rows="2" cols="140" id="search-textarea" style="height:100px" name="q" #{RailsAdminContent::Client.query_str||""}
+    textarea rows="2" cols="140" id="search-textarea" style="height:100px" name="q" #{session[:query_str]||""}
   .nav
     input  type="submit" value="Run" calss="btn btn-primary"
