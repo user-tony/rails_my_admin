@@ -15,4 +15,6 @@
  *= require midnight
  *= require common
  *= require forbidden
+ *= require css/messenger.css
+ *= require css/messenger-theme-air.css
  */

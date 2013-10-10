@@ -29,6 +29,13 @@ initialize_textarea_sql = (id) ->
 			lineNumbers: true,
 			matchBrackets: true,
 			indentUnit: 2
+
+# message_show = (msg, msg_type) ->
+# 	msg_type = 'notice'
+# 	$.globalMessenger().post
+#     message: msg_type
+#     type: msg_type
+#     showCloseButton: true
 			
 
 $(document).ready ->
@@ -136,4 +143,3 @@ $ ->
 			path: '/'
 	if color = $.cookie('document_color')
 		$('body').removeClass('bgcolor1 bgcolor2 bgcolor3 bgcolor4 bgcolor5 bgcolor6 bgcolor7 bgcolor8 bgcolor9 bgcolor10 bgcolor11 bgcolor12 bgcolor13 bgcolor14 bgcolor15 bgcolor16 bgcolor17 bgcolor18 bgcolor19 bgcolor20').addClass(color)
-

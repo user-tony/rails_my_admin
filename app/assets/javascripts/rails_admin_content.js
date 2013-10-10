@@ -21,3 +21,20 @@
 //= require jquery/jquery.color
 //= require jquery/dyndatetime/dynDateTime
 //= require jquery/dyndatetime/calendar_zh
+//= require js/messenger.min
+
+
+
+$._messengerDefaults = {
+	extraClasses: 'messenger-fixed messenger-theme-air messenger-on-top'
+}
+
+function message_show(msg, msg_type){
+	msg_type = 'notice'
+	$.globalMessenger().post({
+	  message: msg,
+	  type: msg_type,
+	  showCloseButton: true
+	});
+}
+

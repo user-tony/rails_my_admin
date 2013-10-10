@@ -7,6 +7,15 @@ html
     = javascript_include_tag 'rails_admin_content'
     = csrf_meta_tag
   body.bgcolor16
+    - if flash[:success]
+      javascript:
+        message_show("#{flash[:success]}", 'success');
+    - if flash[:notice]
+      javascript:
+        message_show("#{flash[:notice]}");
+    - if flash[:errors]
+      javascript:
+        message_show("#{flash[:errors]}", 'errors');
     #body.railsadmin
       = render 'header'
       .Container

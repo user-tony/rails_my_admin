@@ -69,20 +69,25 @@ class RailsAdminContent::Client < Mysql2::Client
   end
 
   def self.update(table_name, id, fields)
-    update_str = "UPDATE #{table_name} SET #{compose_update_sql(table_name, fields.to_a)}  WHERE id = #{id}"
-    conn.origin_query update_str
+    conn.origin_query "UPDATE #{table_name} SET #{compose_update_sql(table_name, fields.to_a)}  WHERE id = #{id}"
   end
 
   def self.compose_update_sql(table_name,fields)
     columns = desc_table(table_name)
     fields.inject([]) do |array, field|
       columns.each do |column|
-        if field[0] == column["Field"]
-          array << (%w(int decimal tinyint).include?(column["Type"].gsub(/\(.*?\)/,'')) ? "#{field[0]} = #{field[1]}" : "#{field[0]} = REPLACE(REPLACE(REPLACE('#{field[1]}', '&','&amp;'), '>', '&gt;'), '<', '&lt;')")
+        if field[1].present? && field[0] == column["Field"]
+          value = case column["Type"].gsub(/\(.*?\)/,'')
+          when 'int', 'decimal', 'tinyint' then field[1]
+          when 'datetime' then "'#{field[1]}'"
+          else
+            "REPLACE(REPLACE(REPLACE('#{field[1]}', '&','&amp;'), '>', '&gt;'), '<', '&lt;')"
+          end
+          array << "#{table_name}.`#{field[0]}` = #{value}"
         end
       end
       array
-    end.join(',')
+    end.join(' , ')
   end
 
   def self.desc_table(table_name)
