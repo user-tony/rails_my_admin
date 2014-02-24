@@ -17,13 +17,13 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", ">= 3.2.13"
+  s.add_dependency "rails"
   s.add_dependency "jquery-rails"
   s.add_dependency 'jquery-ui-rails'
   s.add_dependency 'slim'
-  s.add_dependency 'mysql2', '~> 0.3.13'
-  s.add_dependency 'compass', "~> 0.12.2"
-  s.add_dependency 'sass-rails',   '~> 3.2.3'
+  s.add_dependency 'mysql2'
+  s.add_dependency 'compass'
+  s.add_dependency 'sass-rails'
   s.add_dependency 'compass-rails'
   s.add_dependency 'compass-recipes'
 
