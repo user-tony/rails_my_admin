@@ -7,7 +7,7 @@ require "rails_admin_content/version"
 Gem::Specification.new do |s|
   s.name = "rails_admin_content"
   s.version = RailsAdminContent::VERSION
-  s.authors = ["Terry"]
+  s.authors = ["Tony", "swordray"]
   s.license = 'MIT'
   s.email = ["wtuyuupe@163.com"]
   s.homepage = "http://github.com/tonglijia/rails_admin_content"
