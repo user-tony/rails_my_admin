@@ -1,5 +1,5 @@
 RailsAdminContent::Engine.routes.draw do
-  match '/', to: "develop/manages#index"
+  match '/', to: "develop/manages#index", via: :get
   namespace :develop do
     resources :manages do
       post :filter, on: :collection
